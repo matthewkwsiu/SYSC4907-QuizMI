@@ -1,0 +1,12 @@
+#button-holder{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+#button-holder button {
+  width: 100px;
+  height: 100px;
+  margin: 20px 20px 20px 20px;
+}

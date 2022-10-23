@@ -1,13 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
-import HeaderStudent from "./components/HeaderStudent";
+
+import HeaderInstructor from "./components/HeaderInstructor";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
   return (
-    
     <div className="App">
+	  <div className="Header">
+	    <HeaderInstructor></HeaderInstructor>
+	  </div>
+      
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
