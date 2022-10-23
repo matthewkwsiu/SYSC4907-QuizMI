@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-.App2 {
-  position: sticky;
-  top: 0px;
+.Header {
+	position: sticky;
+	top: 0;
 }
 
 .App-logo {
