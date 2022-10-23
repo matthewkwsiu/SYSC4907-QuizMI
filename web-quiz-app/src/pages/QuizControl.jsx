@@ -1,10 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
 import HeaderInstructor from "./components/HeaderInstructor";
 
-function App() {
+function QuizControl() {
   return (
-    <div className="App">
+    <div>
     <HeaderInstructor></HeaderInstructor>
       <button onClick={generateQuizButton}>New Quiz</button>
       <div id="button-holder"></div>
@@ -19,4 +17,4 @@ function generateQuizButton(){
   document.getElementById('button-holder').appendChild(btn);    
 }
 
-export default App;
+export default QuizControl;
