@@ -1,9 +1,28 @@
+.EditQuiz {
+    text-align: left;
+}
+
 #edit-quiz-header {
     display: flex;
     justify-content: space-between;
 }
 
+#question-response-bar {
+    display: flex;
+    justify-content: space-evenly;
+}
 
+#question-section {
+    padding: 40px;
+}
+
+
+#add-question-dropdown {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    padding: 10px;
+  }
 
 .switch {
     position: relative;
@@ -55,3 +74,4 @@ input:checked + .slider:before {
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
+
