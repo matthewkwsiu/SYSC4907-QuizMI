@@ -1,5 +1,8 @@
 import './css/EditQuiz.css';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+
 
 function EditQuiz(){
     return(
@@ -23,53 +26,37 @@ function EditQuiz(){
             </div>
 
             <div id="question-response-bar">
-                <a href={"#"}>Questions</a>
-                <a href={"#"}>Responses</a>
+                <Tabs
+                defaultActiveKey="profile"
+                id="justify-tab-example"
+                className="mb-3"
+                >
+                    <Tab eventKey="questions" title="Questions">
+                        <div id="question-section">
+                            <a>questions will appear here</a><br></br>
+                            <a>question 1</a><br></br>
+                            <a>question 2</a>
+                        </div>
+
+                        <div id="add-question-dropdown">
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Add New Question
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="#/action-1">Text</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Multiple Choice</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Multiple Select</Dropdown.Item>
+                                <Dropdown.Item href="#/action-4">Numerical</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        </div>
+                    </Tab>
+                    <Tab eventKey="responses" title="Responses">
+                        <a>Here are the responses</a>
+                    </Tab>
+                </Tabs>
             </div>
-
-            <div>
-                <div id="question-section">
-                    <a>questions will appear here</a><br></br>
-                    <a>question 1</a><br></br>
-                    <a>question 2</a>
-                </div>
-
-                <div id="add-question-dropdown">
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Add New Question
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Text</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Multiple Choice</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Multiple Select</Dropdown.Item>
-                        <Dropdown.Item href="#/action-4">Numerical</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                </div>
-            </div>
-{/* 
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-                
-                </div>
-            </div> */}
-
         </div>
     );
 }
@@ -81,7 +68,5 @@ function copyQuizId(){
     navigator.clipboard.writeText(copyText.value);
     alert("Copied the text: " + copyText.value);
 }
-
-
 
 export default EditQuiz;
