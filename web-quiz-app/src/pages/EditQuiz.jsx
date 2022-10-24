@@ -11,12 +11,12 @@ function EditQuiz(){
                 <a>Quiz Name</a>
 
                 <div>
-                    <a>Active </a>
+                    <a>Inactive </a>
                     <label class="switch">
                         <input type="checkbox"/>
                         <span class="slider"></span>
                     </label>
-                    <a> Inactive</a>
+                    <a> Active</a>
                 </div>
                 
                 <div>
