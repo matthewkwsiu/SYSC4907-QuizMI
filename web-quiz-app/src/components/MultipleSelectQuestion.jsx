@@ -1,27 +1,75 @@
-function MultipleSelectQuestion {
-}
+import { useState } from 'react';
 
-function ChoiceAndResponse {
-	return(
-	<form>
-  <div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="A) Apples">
-	  <input type="text" class="form-control" placeholder="B) Oranges">
-	  <div class="submit">
-		<button type="button" class="btn btn-primary">Add</button>
-	  </div>
-    </div>
-    <div class="col">
-      <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."></input>
-	  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option2" aria-label="..."></input>
-    </div>
-  </div>
-</form>
-	);
-}
+function MultipleSelectQuestion() {
+	const [inputFields, setInputFields] = useState([
+    {placeholder: '', choice: ''}
+])
 
-function createNewOptions() {
+const addFields = () => {
+	let newfield = { placeholder: '', choice: '' }
+	setInputFields([...inputFields, newfield])
+}
+  return (
+    <form>
+	{inputFields.map((input, index) => {
+		return (
+		<>
+      <div class="row">
+        <div class="col">
+          <input
+			name="placeholder"
+            type="text"
+            class="form-control"
+            placeholder="A) Apples"
+			value={input.placeholder}
+          ></input>
+        </div>
+        <div class="col">
+          <div class="custom-control custom-checkbox">
+            <input
+			  name="choice"
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck1"
+			  value={input.choice}
+            ></input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input
+			name="placeholder"
+            type="text"
+            class="form-control"
+            placeholder="B) Oranges"
+			value={input.placeholder}
+          ></input>
+        </div>
+        <div class="col">
+          <div class="custom-control custom-checkbox">
+            <input
+			  name="choice"
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck1"
+			  value={input.choice}
+            ></input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button onClick={addFields} type="submit" class="btn btn-primary">
+            Add
+          </button>
+        </div>
+      </div>
+	  </>
+	  )
+	})}
+    </form>
+  );
 }
 
 export default MultipleSelectQuestion;

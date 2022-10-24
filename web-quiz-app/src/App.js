@@ -1,10 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import HeaderInstructor from "./components/HeaderInstructor";
+import MultipleSelectQuestion from "./components/MultipleSelectQuestion";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
+  <>
+  
+  <MultipleSelectQuestion></MultipleSelectQuestion>
     
     <div className="App">
 	  <div className="Header">
@@ -27,6 +31,7 @@ function App() {
       </header>
       
     </div>
+	</>
   );
 }
 
