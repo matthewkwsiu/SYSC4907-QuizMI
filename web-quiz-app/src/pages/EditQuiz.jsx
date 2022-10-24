@@ -27,20 +27,31 @@ function EditQuiz(){
 
             <div id="question-response-bar">
                 <Tabs
-                defaultActiveKey="profile"
+                defaultActiveKey="questions"
                 id="justify-tab-example"
                 className="mb-3"
                 >
                     <Tab eventKey="questions" title="Questions">
                         <div id="question-section">
-                            <a>questions will appear here</a><br></br>
-                            <a>question 1</a><br></br>
-                            <a>question 2</a>
+                            <div>
+                                <a>question 1</a><br></br>
+                                <input type="text" /><br></br>
+                                <button>do something</button>
+                            </div>
+                            <div>
+                                <a>question 2</a><br></br>
+                                <button>button</button>
+                            </div>
+                            <div>
+                                <a>question 1</a><br></br>
+                                <input type="text" /><br></br>
+                                <button>do something</button>
+                            </div>
                         </div>
 
                         <div id="add-question-dropdown">
                         <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            <Dropdown.Toggle id="dropdown-basic">
                                 Add New Question
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
