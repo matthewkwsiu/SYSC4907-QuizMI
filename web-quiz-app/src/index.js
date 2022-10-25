@@ -15,7 +15,7 @@ export default function Example() {
 
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
-          <route path="quizControl" element={<QuizControl/>} />
+          <Route path="quizControl" element={<QuizControl/>} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
