@@ -1,74 +1,76 @@
-import { useState } from 'react';
+import { useState } from "react";
+import "./css/MultipleSelect.css";
 
 function MultipleSelectQuestion() {
-	const [inputFields, setInputFields] = useState([
-    {placeholder: '', choice: ''}
-])
-
-const addFields = () => {
-	let newfield = { placeholder: '', choice: '' }
-	setInputFields([...inputFields, newfield])
-}
+  const addFields = () => {
+    let newfield = { placeholder: "", choice: "" };
+    setInputFields([...inputFields, newfield]);
+  };
+  const [inputFields, setInputFields] = useState([
+    { option: "", realAnswer: "" },
+  ]);
   return (
-    <form>
-	{inputFields.map((input, index) => {
-		return (
-		<>
-      <div class="row">
-        <div class="col">
-          <input
-			name="placeholder"
-            type="text"
-            class="form-control"
-            placeholder="A) Apples"
-			value={input.placeholder}
-          ></input>
-        </div>
-        <div class="col">
-          <div class="custom-control custom-checkbox">
-            <input
-			  name="choice"
-              type="checkbox"
-              class="custom-control-input"
-              id="customCheck1"
-			  value={input.choice}
-            ></input>
+    <div className="MultipleSelect">
+      <form>
+        <div class="row">
+          <div class="col">
+            <label type="text">Question Title</label>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input
-			name="placeholder"
-            type="text"
-            class="form-control"
-            placeholder="B) Oranges"
-			value={input.placeholder}
-          ></input>
-        </div>
-        <div class="col">
-          <div class="custom-control custom-checkbox">
-            <input
-			  name="choice"
-              type="checkbox"
-              class="custom-control-input"
-              id="customCheck1"
-			  value={input.choice}
-            ></input>
+        <div class="row">
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingQuestion"
+              ></input>
+              <label for="floatingQuestion">Question</label>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <button onClick={addFields} type="submit" class="btn btn-primary">
-            Add
-          </button>
+        <div class="row">
+          <div class="col">
+            <label type="text">Choices</label>
+          </div>
+          <div class="col">
+            <label type="text">Correct Response(s)</label>
+          </div>
         </div>
+        {inputFields.map((input, index) => {
+          return (
+            <div key={index}>
+              <div class="row">
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="option"
+                      id="floatingInput"
+                      value={input.name}
+                    />
+                    <label for="floatingInput">Answer</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <input
+                    class="custom-control-input"
+                    type="checkbox"
+                    value={input.realAnswer}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </form>
+      <div class="submission">
+        <button type="submit" class="btn btn-primary" onClick={addFields}>
+          Add More..
+        </button>
       </div>
-	  </>
-	  )
-	})}
-    </form>
+    </div>
   );
 }
 
