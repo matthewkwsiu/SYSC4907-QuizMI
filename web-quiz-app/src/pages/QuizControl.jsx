@@ -1,4 +1,4 @@
-import HeaderInstructor from "./components/HeaderInstructor";
+import HeaderInstructor from "../components/HeaderInstructor";
 
 function QuizControl() {
   return (
