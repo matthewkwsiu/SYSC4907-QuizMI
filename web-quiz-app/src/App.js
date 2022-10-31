@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import HeaderInstructor from "./components/HeaderInstructor";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import EditQuiz from "./pages/EditQuiz"
 
 function App() {
   return (
@@ -11,8 +10,6 @@ function App() {
 	  <div className="Header">
 	    <HeaderInstructor></HeaderInstructor>
 	  </div>
-    <EditQuiz>
-    </EditQuiz>
       
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
