@@ -1,5 +1,5 @@
 import HeaderInstructor from "../components/HeaderInstructor";
-import './QuizControl.css';
+import './css/QuizControl.css';
 
 function QuizControl() {
   return (
