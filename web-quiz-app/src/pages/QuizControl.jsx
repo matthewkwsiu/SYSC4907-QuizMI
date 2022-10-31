@@ -1,4 +1,5 @@
-import HeaderInstructor from "./components/HeaderInstructor";
+import HeaderInstructor from "../components/HeaderInstructor";
+import './QuizControl.css';
 
 function QuizControl() {
   return (
@@ -12,7 +13,7 @@ function QuizControl() {
 
 function generateQuizButton(){
   var btn = document.createElement("button");        
-  var t = document.createTextNode("button text");       
+  var t = document.createTextNode("Quiz #1");       
   btn.appendChild(t);                                
   document.getElementById('button-holder').appendChild(btn);    
 }

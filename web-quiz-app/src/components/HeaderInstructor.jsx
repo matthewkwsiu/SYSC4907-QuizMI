@@ -1,4 +1,7 @@
 import Nav from 'react-bootstrap/Nav';
+import { Outlet, Link } from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 function HeaderInstructor() {
 return (
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -9,25 +12,24 @@ return (
    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <Link to="/" class="nav-link">Home</Link>
          </li>
          <li class="nav-item">
-            <a class="nav-link" href="#">Quiz Control</a>
-         </li>
-         <li class="nav-item">
-            <div class="dropdown">
-               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Profile
-               </button>
-               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">My Profile</a>
-                  <a class="dropdown-item" href="#">Switch Account</a>
-                  <a class="dropdown-item" href="#">Logout</a>
-               </div>
-            </div>
+            <Link to="/quizControl" class="nav-link">Quiz Control</Link>
          </li>
       </ul>
    </div>
+   <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+         Profile
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+         <Dropdown.Item href="#/action-1">My Profile</Dropdown.Item>
+         <Dropdown.Item href="#/action-2">Switch Account</Dropdown.Item>
+         <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+      </Dropdown.Menu>
+   </Dropdown>
 </nav>
 );
 }
