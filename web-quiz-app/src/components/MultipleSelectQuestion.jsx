@@ -3,12 +3,12 @@ import "./css/MultipleSelect.css";
 
 function MultipleSelectQuestion() {
   const [inputFields, setInputFields] = useState([
-    { option: "", realAnswer: "" },
+    { option: ""},
   ]);
   const [count, setCount] = useState(1)
   const addFields = () => {
 	  if(count < 7) {
-		let newfield = { placeholder: "", choice: "" };
+		let newfield = { option: ""};
 		setInputFields([...inputFields, newfield]);
 		setCount(count + 1)
 	  }
@@ -26,6 +26,11 @@ function MultipleSelectQuestion() {
 	  else {
 		  alert("Cannot remove any more questions!")
 	  }
+  }
+  const handleFormChange = (index, event) => {
+	  let data = [...inputFields];
+	  data[index][event.target.name]=event.target.value;
+	  setInputFields(data);
   }
   return (
     <div className="MultipleSelect">
@@ -68,7 +73,8 @@ function MultipleSelectQuestion() {
                       class="form-control"
                       name="option"
                       id="floatingInput"
-                      value={input.name}
+                      value={input.option}
+					  onChange={event => handleFormChange(index, event)}
                     />
                     <label for="floatingInput">Answer</label>
                   </div>
@@ -77,7 +83,6 @@ function MultipleSelectQuestion() {
                   <input
                     class="custom-control-input"
                     type="checkbox"
-                    value={input.realAnswer}
                   />
                 </div>
                 <div class="col">
