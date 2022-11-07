@@ -3,8 +3,29 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import HeaderInstructor from "../components/HeaderInstructor";
+import TextQuestion from "../components/TextQuestion";
+import NumericalQuestion from "../components/NumericalQuestion";
+import React, { useState } from 'react';
 
 function EditQuiz(){
+    const [questions, setQuestions] = useState([])
+    const addQuestion = (question_type) => {
+        var newQuestion;
+        if(question_type == 1){
+            newQuestion = <TextQuestion></TextQuestion>;
+        }
+        if(question_type == 2){
+            // newQuestion = <></>;
+        }
+        if(question_type == 3){
+            // newQuestion = <></>;
+        }
+        if(question_type == 4){
+            newQuestion = <NumericalQuestion></NumericalQuestion>;
+        }
+        setQuestions([...questions, newQuestion])
+    };
+
     return(
         <div>
             <HeaderInstructor></HeaderInstructor>
@@ -34,33 +55,18 @@ function EditQuiz(){
                     className="mb-3"
                     >
                         <Tab eventKey="questions" title="Questions">
-                            <div id="question-section">
-                                <div>
-                                    <a>question 1</a><br></br>
-                                    <input type="text" /><br></br>
-                                    <button>do something</button>
-                                </div>
-                                <div>
-                                    <a>question 2</a><br></br>
-                                    <button>button</button>
-                                </div>
-                                <div>
-                                    <a>question 1</a><br></br>
-                                    <input type="text" /><br></br>
-                                    <button>do something</button>
-                                </div>
-                            </div>
+                            {questions}
 
                             <div id="add-question-dropdown">
                             <Dropdown>
                                 <Dropdown.Toggle id="dropdown-basic">
                                     Add New Question
                                 </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Text</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Multiple Choice</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Multiple Select</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-4">Numerical</Dropdown.Item>
+                                <Dropdown.Menu id="question_dropdown">
+                                    <Dropdown.Item onClick={e => {addQuestion(1);}}>Text</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => {addQuestion(2);}}>Multiple Choice</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => {addQuestion(3);}}>Multiple Select</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => {addQuestion(4);}}>Numerical</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             </div>
@@ -74,6 +80,7 @@ function EditQuiz(){
         </div>
     );
 }
+
 
 function copyQuizId(){
     var copyText = document.getElementById("QuizIdLabel");
