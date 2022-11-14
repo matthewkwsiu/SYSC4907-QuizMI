@@ -4,6 +4,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import HeaderInstructor from "../components/HeaderInstructor";
 import TextQuestion from "../components/TextQuestion";
+import MultipleSelectQuestion from "../components/MultipleSelectQuestion";
 import NumericalQuestion from "../components/NumericalQuestion";
 import React, { useState } from 'react';
 
@@ -18,7 +19,7 @@ function EditQuiz(){
             // newQuestion = <></>;
         }
         if(question_type == 3){
-            // newQuestion = <></>;
+            newQuestion = <MultipleSelectQuestion></MultipleSelectQuestion>;
         }
         if(question_type == 4){
             newQuestion = <NumericalQuestion></NumericalQuestion>;
