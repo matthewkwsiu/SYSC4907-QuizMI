@@ -1,9 +1,9 @@
-.form-group {
+.row {
 	padding-top: 10px;
 	padding-left: 10px;
 }
 
-.submissionButton {
+.submission {
 	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-left: 10px;
 }
