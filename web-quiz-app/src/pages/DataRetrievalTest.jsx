@@ -7,22 +7,17 @@ function DataRetrievalTest() {
 	const [instructors, setNewInstructors] = useState([])
 	return(
 	<>
-		<div>
-			<button type='button' class="btn btn-link" onClick={() => retrieveInstructorList()}>Retrieve Instructors</button>
+	<div>
+		<button type='button' class="btn btn-link" onClick={() => retrieveInstructorList()}>Retrieve Instructors</button>
+		<button type='button' class="btn btn-link" onClick={() => getJSONResult()}>Print Instructors</button>
 		</div>
-		
-		{instructors.map((instructors, index) => {
-        return (
-          <div key={index}>
-            <h2>id: {instructors.id}</h2>
-            <h2>instructor_name: {instructors.instructor_name}</h2>
-
-            <hr />
-          </div>
-        );
-      })}
-	</>
+		</>
 	);
+	
+	function getJSONResult() {
+		let instructor = JSON.parse(instructors)
+		console.log(instructor.id)
+	}
 	
 	function retrieveInstructorList() {
 	QuizDataService.getAllInstructors()
