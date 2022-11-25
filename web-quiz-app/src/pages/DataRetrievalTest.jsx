@@ -22,15 +22,17 @@ function DataRetrievalTest() {
 	function retrieveInstructorList() {
 	QuizDataService.getAllInstructors()
       .then(response => {
-        setNewInstructors({
-          instructors: response.data
-        });
-        console.log(response.data);
+        setNewInstructors(response.data);
+		console.log(response.data);
       })
       .catch(e => {
         console.log(e);
       });
+
+	  console.log(instructors[0].id);
+	  console.log(instructors[0].instructor_name);
 	}
+	
 }
 
 export default DataRetrievalTest;
