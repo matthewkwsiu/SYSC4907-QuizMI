@@ -28,6 +28,11 @@ class Question(models.Model):
     question_total_marks = models.IntegerField(default=1)
 
 class Response(models.Model):
+    question = models.ForeignKey(
+        'Question',
+        default = 1,
+        on_delete=models.CASCADE,
+    )
     student = models.ForeignKey(
         'Student',
         on_delete=models.CASCADE,
