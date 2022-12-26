@@ -18,3 +18,19 @@ def instructor_list(request):
             
         instructor_serializer = InstructorSerializer(instructors, many=True)
         return JsonResponse(instructor_serializer.data, safe=False)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def student_list(request):
+    if request.method == 'GET':
+        students = Students.objects.all()
+
+        student_name = request.GET.get('student_name', None)
+        if student_name is not None:
+            students = students.filter(student_name__icontains=student_name)
+
+        student_serializer = StudentSerializer(students, many=True)
+        return JsonResponse(student_serializer.data, safe=False)
+
+
+
+

@@ -14,7 +14,8 @@ export default function Example() {
       <Routes>
         <Route index element={<App />} />
         <Route path="quizControl" element={<QuizControl/>} />
-		<Route path="instructors" element={<DataRetrievalTest/>} />
+		    <Route path="instructors" element={<DataRetrievalTest/>} />
+        <Route path="students" element={<DataRetrievalTest2/>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
