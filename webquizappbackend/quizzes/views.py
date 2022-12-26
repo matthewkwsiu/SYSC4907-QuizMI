@@ -43,3 +43,30 @@ def student_list(request):
             return JsonResponse(student_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(student_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    elif request.method == 'DELETE':
+        count = Student.objects.all().delete()
+        return JsonResponse({'message': '{} Students were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def student_detail(request, pk):
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        student_serializer = StudentSerializer(student)
+        return JsonResponse(student_serializer.data)
+    
+    elif request.method == 'PUT':
+        student_data = JSONParser().parse(request)
+        student_serializer = StudentSerializer(student, data=student_data)
+        if student_serializer.is_valid():
+            student_serializer.save()
+            return JsonResponse(student_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(student_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        student.delete()
+        return JsonResponse({'message': 'Student was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
