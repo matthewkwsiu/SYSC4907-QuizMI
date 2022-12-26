@@ -26,12 +26,7 @@ def instructor_list(request):
 @api_view(['GET', 'POST', 'DELETE'])
 def student_list(request):
     if request.method == 'GET':
-<<<<<<< HEAD
         students = Student.objects.all()
-=======
-        students = Students.objects.all()
->>>>>>> 27507ed (prototype to add post)
-
         student_name = request.GET.get('student_name', None)
         if student_name is not None:
             students = students.filter(student_name__icontains=student_name)
