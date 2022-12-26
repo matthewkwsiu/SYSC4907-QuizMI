@@ -8,6 +8,7 @@ import ErrorPage from './error-page';
 import QuizControl from './pages/QuizControl';
 import DataRetrievalTest from './pages/TestPages/DataRetrievalTest';
 
+
 export default function Example() {
   return (
     <BrowserRouter>
