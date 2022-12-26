@@ -68,3 +68,4 @@ def student_detail(request, pk):
     elif request.method == 'DELETE':
         student.delete()
         return JsonResponse({'message': 'Student was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
