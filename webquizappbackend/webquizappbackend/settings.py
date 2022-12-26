@@ -76,12 +76,12 @@ WSGI_APPLICATION = 'webquizappbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quizmidatabase',
-        'USER': 'admin',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'quizmidatabase', 
+        'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
     }
 }
 
