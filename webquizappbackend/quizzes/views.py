@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
+from rest_framework.parsers import JSONParser 
+from rest_framework import status
 
 from quizzes.models import Instructor
 from quizzes.serializers import InstructorSerializer
@@ -32,7 +34,12 @@ def student_list(request):
 
         student_serializer = StudentSerializer(students, many=True)
         return JsonResponse(student_serializer.data, safe=False)
-
-
-
+    
+    elif request.method == 'POST':
+        student_data = JSONParser().parse(request)
+        student_serializer = StudentSerializer(data=student_data)
+        if student_serializer.is_valid():
+            student_serializer.save()
+            return JsonResponse(student_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(student_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
