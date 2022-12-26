@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 
 from quizzes.models import Instructor
 from quizzes.serializers import InstructorSerializer
+from quizzes.models import Student
+from quizzes.serializers import StudentSerializer
 
 # Create your views here.
 
