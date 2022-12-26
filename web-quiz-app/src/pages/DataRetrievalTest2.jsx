@@ -3,7 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 
 
-function DataRetrievalTests() {
+function DataRetrievalTest2() {
 	const [students, setNewStudents] = useState([])
 	
 	function retrieveStudentList() {
@@ -36,4 +36,4 @@ function DataRetrievalTests() {
 	
 }
 
-export default DataRetrievalTests;
+export default DataRetrievalTest2;
