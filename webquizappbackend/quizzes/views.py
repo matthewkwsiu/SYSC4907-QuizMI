@@ -24,7 +24,7 @@ def instructor_list(request):
 @api_view(['GET', 'POST', 'DELETE'])
 def student_list(request):
     if request.method == 'GET':
-        students = Students.objects.all()
+        students = Student.objects.all()
 
         student_name = request.GET.get('student_name', None)
         if student_name is not None:
