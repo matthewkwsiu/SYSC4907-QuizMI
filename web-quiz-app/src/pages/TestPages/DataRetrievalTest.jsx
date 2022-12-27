@@ -1,4 +1,4 @@
-import QuizDataService from "../services/quiz.service";
+import QuizDataService from "../../services/quiz.service";
 import axios from "axios";
 import {useEffect, useState} from "react";
 

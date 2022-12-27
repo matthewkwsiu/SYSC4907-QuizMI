@@ -6,7 +6,7 @@ import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import ErrorPage from './error-page';
 import QuizControl from './pages/QuizControl';
-import DataRetrievalTest from './pages/DataRetrievalTest';
+import DataRetrievalTest from './pages/TestPages/DataRetrievalTest';
 
 export default function Example() {
   return (
