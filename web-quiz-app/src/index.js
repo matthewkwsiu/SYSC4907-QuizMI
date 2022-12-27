@@ -6,6 +6,7 @@ import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import ErrorPage from './error-page';
 import QuizControl from './pages/QuizControl';
+import DataRetrievalTest from './pages/TestPages/DataRetrievalTest';
 
 export default function Example() {
   return (
@@ -13,6 +14,7 @@ export default function Example() {
       <Routes>
         <Route index element={<App />} />
         <Route path="quizControl" element={<QuizControl/>} />
+		<Route path="instructors" element={<DataRetrievalTest/>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
