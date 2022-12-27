@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Other folders to ignore
+node_modules/
+projectVirtualEnvironment/
+
+
+
+
+
