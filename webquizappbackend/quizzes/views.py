@@ -8,6 +8,8 @@ from quizzes.models import Instructor
 from quizzes.serializers import InstructorSerializer
 from quizzes.models import Student
 from quizzes.serializers import StudentSerializer
+from quizzes.models import Quiz
+from quizzes.serializers import QuizSerializer
 
 # Create your views here.
 
@@ -68,4 +70,54 @@ def student_detail(request, pk):
     elif request.method == 'DELETE':
         student.delete()
         return JsonResponse({'message': 'Student was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def quiz_list(request):
+    if request.method == 'GET':
+        quizzes = Quiz.objects.all()
+
+        quiz_name = request.GET.get('quiz_name', None)
+        if quiz_name is not None:
+            quizzes = quizzes.filter(quiz_name__icontains=quiz_name)
+
+        quiz_serializer = QuizSerializer(quizzes, many=True)
+        return JsonResponse(quiz_serializer.data, safe=False)
+    
+    elif request.method == 'POST':
+        quiz_data = JSONParser().parse(request)
+        quiz_serializer = QuizSerializer(data=quiz_data)
+        if quiz_serializer.is_valid():
+            quiz_serializer.save()
+            return JsonResponse(quiz_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(quiz_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        count = Quiz.objects.all().delete()
+        return JsonResponse({'message': '{} Quizzes were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'DELETE'])
+def quiz_list_owned_by_instructor(request, instructorId):
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        quizzes = Quiz.objects.all()
+
+        quiz_name = request.GET.get('quiz_name', None)
+        if quiz_name is not None:
+            quizzes = quizzes.filter(quiz_name__icontains=quiz_name)
+
+        quiz_serializer = QuizSerializer(quizzes, many=True)
+        return JsonResponse(quiz_serializer.data, safe=False)
+
+    elif request.method == 'DELETE':
+        count = Quiz.objects.all().delete()
+        return JsonResponse({'message': '{} Quizzes were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def quiz_detail(request, pk):
+    return 0
 
