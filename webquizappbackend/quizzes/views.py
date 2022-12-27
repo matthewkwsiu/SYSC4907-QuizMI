@@ -98,12 +98,12 @@ def quiz_list(request):
 @api_view(['GET', 'DELETE'])
 def quiz_list_owned_by_instructor(request, instructorId):
     try:
-        student = Student.objects.get(pk=pk)
-    except Student.DoesNotExist:
-        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        instructor = Instructor.objects.get(id=instructorId)
+    except Instructor.DoesNotExist:
+        return JsonResponse({'message': 'The instructor does not exist'}, status=status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
-        quizzes = Quiz.objects.all()
+        quizzes = Quiz.objects.all().filter(instructor_id=instructorId)
 
         quiz_name = request.GET.get('quiz_name', None)
         if quiz_name is not None:
@@ -113,7 +113,7 @@ def quiz_list_owned_by_instructor(request, instructorId):
         return JsonResponse(quiz_serializer.data, safe=False)
 
     elif request.method == 'DELETE':
-        count = Quiz.objects.all().delete()
+        count = Quiz.objects.all().filter(instructor_id=instructorId).delete()
         return JsonResponse({'message': '{} Quizzes were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 
 

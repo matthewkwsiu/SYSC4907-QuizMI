@@ -17,6 +17,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
 class QuizSerializer(serializers.ModelSerializer):
     
+    
     class Meta:
         model = Quiz
         fields = ('id', 'quiz_name', 'course_name', 'active_status', 'feedback_status', 'instructor_id')
