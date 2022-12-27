@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import HeaderInstructor from "./components/HeaderInstructor";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import JoinQuiz from './pages/JoinQuiz';
 
 function App() {
   return (
