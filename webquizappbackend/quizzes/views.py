@@ -29,6 +29,7 @@ def instructor_list(request):
 def student_list(request):
     if request.method == 'GET':
         students = Student.objects.all()
+
         student_name = request.GET.get('student_name', None)
         if student_name is not None:
             students = students.filter(student_name__icontains=student_name)
