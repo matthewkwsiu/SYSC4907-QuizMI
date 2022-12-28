@@ -1,10 +1,10 @@
 import './css/TextQuestion.css'
 
-function TextQuestionAnswer() {
+function TextQuestionAnswer(props) {
     return(
         <form>
             <div class="form-group">
-                <label for="formGroupExampleInput">QUESTION SHOULD BE HERE</label>
+                <label for="formGroupExampleInput">{getQuestion(props)}</label>
                 <input type="text" class="form-control" id="formGroupExampleInput" placeholder="What is Java?"></input>
             </div>
             <div class="submitAnswer">
@@ -12,6 +12,10 @@ function TextQuestionAnswer() {
             </div>
         </form>
     );
+}
+
+function getQuestion(props){
+    return props.text;
 }
 
 export default TextQuestionAnswer;

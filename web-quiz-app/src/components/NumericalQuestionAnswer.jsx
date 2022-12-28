@@ -4,7 +4,7 @@ function NumericalQuestionAnswer() {
    return(
       <form>
          <div class="form-group">
-            <label for="formGroupExampleInput">QUESTION TO BE ADDED</label>
+            <label for="formGroupExampleInput">{getQuestion(props)}</label>
             <input type="number" step="any" class="form-control" id="formGroupExampleInput2" placeholder=""></input>
          </div>
          <div class="submissionButton">
@@ -13,4 +13,9 @@ function NumericalQuestionAnswer() {
       </form>
    );
 }
+
+function getQuestion(props){
+   return props.text;
+}
+
 export default NumericalQuestionAnswer;

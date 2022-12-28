@@ -3,6 +3,8 @@ import './App.css';
 import HeaderInstructor from "./components/HeaderInstructor";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import JoinQuiz from './pages/JoinQuiz';
+import TextQuestionAnswer from './components/TextQuestionAnswer';
+import MultipleSelectQuestionAnswer from './components/MultipleSelectQuestionAnswer';
 
 function App() {
   return (
@@ -10,6 +12,8 @@ function App() {
     <div className="App">
 	  <div className="Header">
 	    <HeaderInstructor></HeaderInstructor>
+      <TextQuestionAnswer text="Here is a question"></TextQuestionAnswer>
+      <MultipleSelectQuestionAnswer text="Which of of the following fruits is a citrus?||| orange, apple, peach, mango"></MultipleSelectQuestionAnswer>
 	  </div>
       
       <header className="App-header">
