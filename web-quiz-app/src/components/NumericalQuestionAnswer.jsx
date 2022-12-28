@@ -1,6 +1,6 @@
 import './css/NumericalQuestion.css'
 
-function NumericalQuestion() {
+function NumericalQuestionAnswer() {
    return(
       <form>
          <div class="form-group">
@@ -13,4 +13,4 @@ function NumericalQuestion() {
       </form>
    );
 }
-export default NumericalQuestion;
+export default NumericalQuestionAnswer;

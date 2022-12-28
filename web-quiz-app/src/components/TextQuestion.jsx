@@ -1,6 +1,6 @@
 import './css/TextQuestion.css'
 
-function TextQuestionAnswer() {
+function TextQuestion() {
     return(
         <form>
             <div class="form-group">
@@ -18,4 +18,4 @@ function TextQuestionAnswer() {
     );
 }
 
-export default TextQuestionAnswer;
+export default TextQuestion;
