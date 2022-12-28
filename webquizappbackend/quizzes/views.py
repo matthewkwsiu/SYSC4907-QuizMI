@@ -10,7 +10,8 @@ from quizzes.models import Student
 from quizzes.serializers import StudentSerializer
 from quizzes.models import Quiz
 from quizzes.serializers import QuizSerializer
-
+from quizzes.models import Question
+from quizzes.serializers import QuestionSerializer
 # Create your views here.
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -139,3 +140,18 @@ def quiz_list_owned_by_instructor(request, instructorId):
     elif request.method == 'DELETE':
         count = Quiz.objects.all().filter(instructor_id=instructorId).delete()
         return JsonResponse({'message': '{} Quizzes were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        
+@api_view(['POST', 'DELETE'])
+def questions_list(request):
+    if request.method == 'POST':
+        question_data = JSONParser().parse(request)
+        question_serializer = QuestionSerializer(data=question_data)
+        '''
+        question_serializer.is_valid()
+        print(question_serializer.errors)
+        print(question_serializer.data)
+        '''
+        if question_serializer.is_valid():
+            question_serializer.save()
+            return JsonResponse(question_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(question_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
