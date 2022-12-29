@@ -13,6 +13,7 @@ function UIPageTest() {
             <NumericalQuestionAnswer text="What is the value of pi to two sig figs?"></NumericalQuestionAnswer>
             <MultipleSelectQuestionAnswer text="Which of of the following fruits is a citrus?|||orange, apple, peach, mango"></MultipleSelectQuestionAnswer>
             <MultipleChoiceQuestionAnswer text="Which of of the following fruits is a citrus?|||orange, apple, peach, mango"></MultipleChoiceQuestionAnswer>
+
         </div>
     );
 }
