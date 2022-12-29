@@ -2,9 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import HeaderInstructor from "./components/HeaderInstructor";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import JoinQuiz from './pages/JoinQuiz';
-import TextQuestionAnswer from './components/TextQuestionAnswer';
-import MultipleSelectQuestionAnswer from './components/MultipleSelectQuestionAnswer';
 
 function App() {
   return (
