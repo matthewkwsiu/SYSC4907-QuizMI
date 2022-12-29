@@ -18,7 +18,7 @@ class MultipleSelectQuestionAnswer extends React.Component {
             <form>
                 <div class="form-group">
                     <label for="formGroupExampleInput">{this.state.question}</label>
-                    <form id="multipleSelectForm">
+                    <form id="multipleChoiceForm">
                     </form>              
                 </div>
                 <div class="submissionButton">
@@ -31,18 +31,19 @@ class MultipleSelectQuestionAnswer extends React.Component {
 
 function createSelectionElements(selections) {
 
-    var select = document.getElementById("multipleSelectForm");
+    var select = document.getElementById("multipleChoiceForm");
     var input;
     var label;
 
     for (var i = 0; i < selections.length; i++) {
         input = document.createElement("input");
-        input.type = "checkbox";
-        input.id = "select"+selections[i] + i;
+        input.type = "radio";
+        input.name = "choice";
+        input.id = "choice"+selections[i] + i;
         select.appendChild(input);
         label = document.createElement("label");
         label.innerHTML = selections[i];
-        label.htmlFor = "select"+selections[i] + i;
+        label.htmlFor = "choice"+selections[i] + i;
         select.appendChild(label);
         select.appendChild(document.createElement("br"))
     }

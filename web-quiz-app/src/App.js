@@ -12,9 +12,7 @@ function App() {
     <div className="App">
 	  <div className="Header">
 	    <HeaderInstructor></HeaderInstructor>
-      <TextQuestionAnswer text="Here is a question"></TextQuestionAnswer>
-      <MultipleSelectQuestionAnswer text="Which of of the following fruits is a citrus?||| orange, apple, peach, mango"></MultipleSelectQuestionAnswer>
-	  </div>
+      </div>
       
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

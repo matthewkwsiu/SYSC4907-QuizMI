@@ -5,7 +5,7 @@ function TextQuestionAnswer(props) {
         <form>
             <div class="form-group">
                 <label for="formGroupExampleInput">{getQuestion(props)}</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="What is Java?"></input>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder=""></input>
             </div>
             <div class="submitAnswer">
                 <button type="submit" class="btn btn-primary">Done</button>
