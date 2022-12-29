@@ -17,6 +17,7 @@ function JoinQuiz() {
 
 function NavigateToQuiz() {
     window.location.href = '/joinQuiz/' + document.getElementById("quizID").value;
+
 }
 
 export default JoinQuiz;
