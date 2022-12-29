@@ -7,8 +7,8 @@ function App() {
   return (
     
     <div className="App">
-	  <div className="Header">
-	    <HeaderInstructor></HeaderInstructor>
+      <div className="Header">
+        <HeaderInstructor></HeaderInstructor>
       </div>
       
       <header className="App-header">
