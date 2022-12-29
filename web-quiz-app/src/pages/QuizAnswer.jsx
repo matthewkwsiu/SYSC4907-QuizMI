@@ -1,4 +1,4 @@
-import HeaderStudent from "../components/HeaderInstructor";
+import HeaderStudent from "../components/HeaderStudent";
 
 function QuizAnswer() {
   return (

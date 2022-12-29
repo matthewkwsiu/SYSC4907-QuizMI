@@ -1,7 +1,7 @@
 import HeaderStudent from "../components/HeaderStudent";
 import './css/QuizControl.css';
 import React from "react";
-import HeaderStudent from "../components/HeaderInstructor";
+import HeaderStudent from "../components/HeaderStudent";
 
 function JoinQuiz() {
     return (
