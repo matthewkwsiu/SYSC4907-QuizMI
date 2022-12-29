@@ -1,7 +1,7 @@
 import './css/TextQuestion.css'
 
 function TextQuestionAnswer(props) {
-    return(
+    return (
         <form>
             <div class="form-group">
                 <label for="formGroupExampleInput">{getQuestion(props)}</label>
@@ -14,7 +14,7 @@ function TextQuestionAnswer(props) {
     );
 }
 
-function getQuestion(props){
+function getQuestion(props) {
     return props.text;
 }
 

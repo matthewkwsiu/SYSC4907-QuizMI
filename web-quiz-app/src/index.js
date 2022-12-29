@@ -23,7 +23,6 @@ export default function Example() {
         <Route path="testUI" element={<UIPageTest/>} />
         <Route path="joinQuiz" element={<JoinQuiz/>} />
         <Route path="testQuizAnswer" element={<QuizAnswer/>} />
-        <Route path="testQuizAnswer" element={<QuizAnswer/>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

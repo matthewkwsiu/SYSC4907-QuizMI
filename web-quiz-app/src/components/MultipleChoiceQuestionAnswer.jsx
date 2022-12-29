@@ -3,23 +3,23 @@ import ReactDOM from 'react-dom';
 
 class MultipleSelectQuestionAnswer extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            question: props.text.split("|||")[0], 
+            question: props.text.split("|||")[0],
             selections: props.text.split("|||")[1].split(", ")
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         createSelectionElements(this.state.selections);
     }
-    render(){
+    render() {
         return (
             <form>
                 <div class="form-group">
                     <label for="formGroupExampleInput">{this.state.question}</label>
                     <form id="multipleChoiceForm">
-                    </form>              
+                    </form>
                 </div>
                 <div class="submissionButton">
                     <button type="submit" class="btn btn-primary">Done</button>
@@ -39,15 +39,14 @@ function createSelectionElements(selections) {
         input = document.createElement("input");
         input.type = "radio";
         input.name = "choice";
-        input.id = "choice"+selections[i] + i;
+        input.id = "choice" + selections[i] + i;
         select.appendChild(input);
         label = document.createElement("label");
         label.innerHTML = selections[i];
-        label.htmlFor = "choice"+selections[i] + i;
+        label.htmlFor = "choice" + selections[i] + i;
         select.appendChild(label);
         select.appendChild(document.createElement("br"))
     }
-
 }
 
 export default MultipleSelectQuestionAnswer;
