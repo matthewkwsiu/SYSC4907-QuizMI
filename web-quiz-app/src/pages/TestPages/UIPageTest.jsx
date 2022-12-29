@@ -5,7 +5,7 @@ import MultipleSelectQuestionAnswer from "../../components/MultipleSelectQuestio
 import MultipleChoiceQuestionAnswer from "../../components/MultipleChoiceQuestionAnswer";
 
 function UIPageTest() {
-    return(
+    return (
         <div>
             <label>Test UI Page</label>
             {/* Insert component/page to test here. */}
