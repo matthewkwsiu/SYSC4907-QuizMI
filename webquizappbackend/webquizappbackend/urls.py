@@ -1,5 +1,4 @@
 """webquizappbackend URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -13,15 +12,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import re_path, path
-from quizzes import views
+from django.contrib import admin
+from django.urls import re_path, include
 
 urlpatterns = [
-    path('instructors', views.instructor_list),
-    path('students', views.student_list),
-    path('students/<int:pk>', views.student_detail),
-    path('quizzes', views.quiz_list), 
-    path('quizzes/<int:pk>', views.quiz_detail), 
-    path('quizzes/instructor/<int:instructorId>', views.quiz_list_owned_by_instructor),
-    path('questions', views.questions_list),
+    #path('admin/', admin.site.urls),
+    re_path(r'^', include('quizzes.urls')),
 ]

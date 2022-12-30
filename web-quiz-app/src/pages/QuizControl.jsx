@@ -19,16 +19,6 @@ class QuizControl extends React.Component {
 }
 
 function generateQuizButton(){
-	var instructor = {
-		instructor_name: "pog"
-	}
-	 QuizDataService.createInstructor(instructor)
-      .then(response => {
-        console.log("Created Instructor");
-      })
-      .catch(e => {
-        console.log(e);
-      });
 	var quizName = prompt("Enter quiz name");
 	var quiz = {
 		id: 1,
