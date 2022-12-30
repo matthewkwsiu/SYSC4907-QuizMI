@@ -8,6 +8,7 @@ import EditQuiz from './pages/EditQuiz';
 import ErrorPage from './error-page';
 import QuizControl from './pages/QuizControl';
 import DataRetrievalTest from './pages/TestPages/DataRetrievalTest';
+import UIPageTest from './pages/TestPages/UIPageTest';
 
 export default function Example() {
   return (
@@ -16,6 +17,7 @@ export default function Example() {
         <Route index element={<App />} />
         <Route path="quizControl" element={<QuizControl/>} />
         <Route path="instructors" element={<DataRetrievalTest/>} />
+        <Route path="testUI" element={<UIPageTest></UIPageTest>} />
         <Route path="*" element={<ErrorPage />} />
 		<Route path="editQuiz" element={<EditQuiz/>} />
       </Routes>
