@@ -12,19 +12,19 @@ import Login from './pages/Login';
 import EditQuiz from './pages/EditQuiz';
 
 export default function Example() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<App />} />
-        <Route path="quizControl" element={<QuizControl/>} />
-        <Route path="instructors" element={<DataRetrievalTest/>} />
-        <Route path="testUI" element={<UIPageTest></UIPageTest>} />
-		<Route path="login" element={<Login />} />
-		<Route path="editQuiz" element={<EditQuiz />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<App />} />
+                <Route path="quizControl" element={<QuizControl />} />
+                <Route path="instructors" element={<DataRetrievalTest />} />
+                <Route path="testUI" element={<UIPageTest></UIPageTest>} />
+                <Route path="login" element={<Login />} />
+                <Route path="editQuiz" element={<EditQuiz />} />
+                <Route path="*" element={<ErrorPage />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
