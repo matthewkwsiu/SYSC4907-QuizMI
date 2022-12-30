@@ -1,33 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
 import HeaderInstructor from "./components/HeaderInstructor";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  return (
-    
-    <div className="App">
-      <div className="Header">
-        <HeaderInstructor></HeaderInstructor>
-      </div>
-      
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      
-    </div>
-  );
+    document.body.style = 'background: #282c34;';
+    return (
+        <div className="App" style={{ background: "black" }}>
+            <div className="Header">
+                <HeaderInstructor></HeaderInstructor>
+            </div>
+            <header className="App-header">
+                <h1>QuizMI</h1>
+                <p>Welcome to the QuizMI Home Page!</p>
+                <p>
+                    QuizMI is an web app with the goal of assisting instructors in teaching
+                    students by providing a tool to create interactive quizzes.
+                </p>
+                <p>
+                    These quizzes can be helpful for improving engagement in classses and
+                    provide real-time feedback on student understanding.
+                </p>
+            </header>
+        </div>
+    );
 }
 
 export default App;
