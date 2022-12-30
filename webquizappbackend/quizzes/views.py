@@ -24,6 +24,15 @@ def instructor_list(request):
             
         instructor_serializer = InstructorSerializer(instructors, many=True)
         return JsonResponse(instructor_serializer.data, safe=False)
+        
+    elif request.method == 'POST':
+        instructor_data = JSONParser().parse(request)
+        instructor_serializer = InstructorSerializer(data=instructor_data)
+        if instructor_serializer.is_valid():
+            instructor_serializer.save()
+            return JsonResponse(instructor_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(instructor_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET', 'POST', 'DELETE'])
 def student_list(request):
