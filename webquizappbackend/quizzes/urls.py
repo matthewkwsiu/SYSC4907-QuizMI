@@ -9,3 +9,4 @@ urlpatterns = [
     path('quizzes/<int:pk>', views.quiz_detail), 
     path('quizzes/instructor/<int:instructorId>', views.quiz_list_owned_by_instructor),
 ]
+
