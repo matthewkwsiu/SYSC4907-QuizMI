@@ -156,11 +156,6 @@ def questions_list(request):
     if request.method == 'POST':
         question_data = JSONParser().parse(request)
         question_serializer = QuestionSerializer(data=question_data)
-        '''
-        question_serializer.is_valid()
-        print(question_serializer.errors)
-        print(question_serializer.data)
-       '''
         if question_serializer.is_valid():
             question_serializer.save()
             return JsonResponse(question_serializer.data, status=status.HTTP_201_CREATED)
