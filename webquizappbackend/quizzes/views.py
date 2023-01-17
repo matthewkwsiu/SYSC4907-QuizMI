@@ -173,7 +173,11 @@ def questions_detail(request, questionId):
     except Question.DoesNotExist:
         return JsonResponse({'message': 'The question does not exist'}, status=status.HTTP_404_NOT_FOUND)
     if request.method == 'PUT':
-        pass
+        question_data = JSONParser().parse(request)
+        question_serializer = QuestionSerializer(questions, data=question_data)
+        if question_serializer.is_valid():
+            question_serializer.save()
+            return JsonResponse(question_serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'GET':
         target = Question.objects.all().filter(id=questionId)
         question = QuestionSerializer(data=target)
