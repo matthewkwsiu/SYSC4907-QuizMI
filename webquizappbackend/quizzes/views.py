@@ -193,7 +193,18 @@ def questions_quiz_detail(request, quizId):
     elif request.method == 'DELETE':
         target = Question.objects.all().filter(quiz_id=quizId).delete()
         return JsonResponse({'message': '{} Questions were deleted successfully!'.format(target[0])}, status=status.HTTP_204_NO_CONTENT)
-@api_view(['GET', 'POST', 'DELETE'])
+
+@api_view(['POST'])
+def response_list(request):
+    if request.method == 'POST':
+        response_data = JSONParser().parse(request)
+        response_serializer = ResponseSerializer(data=response_data)
+        if response_serializer.is_valid():
+            response_serializer.save()
+            return JsonResponse(response_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(response_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
 def response_detail(request, pk):
     try:
         response = Response.objects.get(pk=pk)
@@ -204,9 +215,9 @@ def response_detail(request, pk):
         response_serializer = ResponseSerializer(response)
         return JsonResponse(response_serializer.data)
     
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         response_data = JSONParser().parse(request)
-        response_serializer = ResponseSerializer(data=response_data)
+        response_serializer = ResponseSerializer(response, data=response_data)
         if response_serializer.is_valid():
             response_serializer.save()
             return JsonResponse(response_serializer.data, status=status.HTTP_201_CREATED)

@@ -34,7 +34,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 class ResponseSerializer(serializers.ModelSerializer):
     student_id = serializers.IntegerField(style={'intput_type':'hidden'})
     question_id = serializers.IntegerField(style={'intput_type':'hidden'})
+    quiz_id = serializers.IntegerField(style={'intput_type':'hidden'})
 
     class Meta: 
         model = Response
-        fields = ('id', 'attempt_number', 'response_data', 'grade_achieved', 'student_id', 'question_id')
+        fields = ('id', 'attempt_number', 'response_data', 'grade_achieved', 'student_id', 'question_id', 'quiz_id')

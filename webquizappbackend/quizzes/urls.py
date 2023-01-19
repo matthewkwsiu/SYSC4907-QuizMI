@@ -12,6 +12,8 @@ urlpatterns = [
     path('questions/quiz/<int:quizId>', views.questions_quiz_detail),
     # path('responses', views.quiz_list), 
     path('responses/<int:pk>', views.quiz_detail), 
+    path('responses', views.response_list), 
+    path('responses/<int:pk>', views.response_detail), 
     path('responses/student/<int:studentId>', views.response_list_with_student_Id),
     path('responses/question/<int:questionId>', views.response_list_with_question_Id),
     path('responses/quiz/<int:quizId>', views.response_list_with_quiz_Id),
