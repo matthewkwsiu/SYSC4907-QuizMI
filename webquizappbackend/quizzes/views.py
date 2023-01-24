@@ -247,7 +247,7 @@ def response_list_with_question_Id(request, questionId):
 
     elif request.method == 'DELETE':
         count = Response.objects.all().filter(question_id=questionId).delete()
-        return JsonResponse({'message': '{} Responses were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': '{} Response(s) were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'DELETE'])
 def response_list_with_student_Id(request, studentId):
@@ -269,7 +269,7 @@ def response_list_with_student_Id(request, studentId):
 
     elif request.method == 'DELETE':
         count = Response.objects.all().filter(student_id=studentId).delete()
-        return JsonResponse({'message': '{} Responses were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': '{} Response(s) were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'DELETE'])
 def response_list_with_quiz_Id(request, quizId):
@@ -291,4 +291,4 @@ def response_list_with_quiz_Id(request, quizId):
 
     elif request.method == 'DELETE':
         count = Response.objects.all().filter(quiz_id=quizId).delete()
-        return JsonResponse({'message': '{} Responses were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': '{} Response(s) were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
