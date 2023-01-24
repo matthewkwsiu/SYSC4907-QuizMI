@@ -8,6 +8,7 @@ urlpatterns = [
     path('quizzes', views.quiz_list), 
     path('quizzes/<int:pk>', views.quiz_detail), 
     path('quizzes/instructor/<int:instructorId>', views.quiz_list_owned_by_instructor),
+    path('questions', views.questions_list),
     path('questions/<int:questionId>', views.questions_detail),
     path('questions/quiz/<int:quizId>', views.questions_quiz_detail),
     path('responses', views.response_list), 
