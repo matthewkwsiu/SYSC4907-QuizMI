@@ -6,7 +6,8 @@ class Login extends React.Component {
         super(props)
         this.state = {
             login: false,
-            name: ""
+            name: "",
+            isInstructor: false
         }
     }
     nameUpdate = (currentName) => {
@@ -15,20 +16,42 @@ class Login extends React.Component {
         });
         console.log(this.state.name);
     }
+    isInstructorUpdate = (isInstr) => {
+        this.setState({
+            isInstructor: isInstr
+        });
+    }
 
     createUser(name) {
-        var instructor = {
-            instructor_name: name
-        };
-        console.log(instructor.instructor_name)
-        QuizDataService.createInstructor(instructor)
-            .then(response => {
-                console.log("Created instructor" + instructor.instructor_name);
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        if(this.state.isInstructor){
+            var instructor = {
+                instructor_name: name
+            };
+            console.log(instructor.instructor_name)
+            QuizDataService.createInstructor(instructor)
+                .then(response => {
+                    console.log("Created instructor" + instructor.instructor_name);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        } else {
+
+        }
+        // var instructor = {
+        //     instructor_name: name
+        // };
+        // console.log(instructor.instructor_name)
+        // QuizDataService.createInstructor(instructor)
+        //     .then(response => {
+        //         console.log("Created instructor" + instructor.instructor_name);
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
     }
+
+
     render() {
         return (
             <form action="/quizControl">
@@ -44,7 +67,27 @@ class Login extends React.Component {
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter Password" />
                 </div>
-                <button type="submit" class="btn btn-primary" onClick={this.createUser.bind(this, this.state.name)}>Submit</button>
+                <div class="form-group">
+                    <label>User Type</label><br></br>
+                    <label for="Instructor">
+                        <input type="radio" 
+                        id="isInstructor" 
+                        value="true" 
+                        checked={this.state.isInstructor} 
+                        onChange={() => this.isInstructorUpdate(true)} />
+                        Instructor
+                    </label><br></br>
+                    <label for="Student">
+                        <input 
+                        type="radio" 
+                        id="isInstructor" 
+                        value="false" 
+                        checked={!this.state.isInstructor} 
+                        onChange={() => this.isInstructorUpdate(false)} />
+                        Student
+                    </label><br></br>
+                </div>
+                <button type="submit" class="btn btn-primary" onClick={this.createUser.bind(this, this.state.name, this.state.isInstructor)}>Submit</button>
             </form>
         );
     }
