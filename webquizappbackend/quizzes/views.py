@@ -12,6 +12,9 @@ from quizzes.models import Quiz
 from quizzes.serializers import QuizSerializer
 from quizzes.models import Question
 from quizzes.serializers import QuestionSerializer
+from quizzes.models import Response
+from quizzes.serializers import ResponseSerializer
+
 
 # Create your views here.
 
@@ -190,3 +193,102 @@ def questions_quiz_detail(request, quizId):
     elif request.method == 'DELETE':
         target = Question.objects.all().filter(quiz_id=quizId).delete()
         return JsonResponse({'message': '{} Questions were deleted successfully!'.format(target[0])}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def response_list(request):
+    if request.method == 'POST':
+        response_data = JSONParser().parse(request)
+        response_serializer = ResponseSerializer(data=response_data)
+        if response_serializer.is_valid():
+            response_serializer.save()
+            return JsonResponse(response_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(response_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def response_detail(request, pk):
+    try:
+        response = Response.objects.get(pk=pk)
+    except Response.DoesNotExist:
+        return JsonResponse({'message': 'The response does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        response_serializer = ResponseSerializer(response)
+        return JsonResponse(response_serializer.data)
+    
+    elif request.method == 'PUT':
+        response_data = JSONParser().parse(request)
+        response_serializer = ResponseSerializer(response, data=response_data)
+        if response_serializer.is_valid():
+            response_serializer.save()
+            return JsonResponse(response_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(response_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        response.delete()
+        return JsonResponse({'message': 'Response was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'DELETE'])
+def response_list_with_question_Id(request, questionId):
+    try:
+        question = Question.objects.get(id=questionId)
+    except Question.DoesNotExist:
+        return JsonResponse({'message': 'The question does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        response = Response.objects.all().filter(question_id=questionId)
+
+        response_name = request.GET.get('response_name', None)
+        if response_name is not None:
+            response = response.filter(response_name__icontains=response_name)
+
+        response_serializer = ResponseSerializer(response, many=True)
+        return JsonResponse(response_serializer.data, safe=False)
+
+
+    elif request.method == 'DELETE':
+        count = Response.objects.all().filter(question_id=questionId).delete()
+        return JsonResponse({'message': '{} Response(s) were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'DELETE'])
+def response_list_with_student_Id(request, studentId):
+    try:
+        student = Student.objects.get(id=studentId)
+    except Student.DoesNotExist:
+        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        response = Response.objects.all().filter(student_id=studentId)
+
+        response_name = request.GET.get('response_name', None)
+        if response_name is not None:
+            response = response.filter(response_name__icontains=response_name)
+
+        response_serializer = ResponseSerializer(response, many=True)
+        return JsonResponse(response_serializer.data, safe=False)
+
+
+    elif request.method == 'DELETE':
+        count = Response.objects.all().filter(student_id=studentId).delete()
+        return JsonResponse({'message': '{} Response(s) were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'DELETE'])
+def response_list_with_quiz_Id(request, quizId):
+    try:
+        quiz = Quiz.objects.get(id=quizId)
+    except Quiz.DoesNotExist:
+        return JsonResponse({'message': 'The quiz does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        response = Response.objects.all().filter(quiz_id=quizId)
+
+        response_name = request.GET.get('response_name', None)
+        if response_name is not None:
+            response = response.filter(response_name__icontains=response_name)
+
+        response_serializer = ResponseSerializer(response, many=True)
+        return JsonResponse(response_serializer.data, safe=False)
+
+
+    elif request.method == 'DELETE':
+        count = Response.objects.all().filter(quiz_id=quizId).delete()
+        return JsonResponse({'message': '{} Response(s) were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
