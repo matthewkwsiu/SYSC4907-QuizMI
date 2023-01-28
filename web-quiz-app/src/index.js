@@ -10,7 +10,6 @@ import QuizControl from './pages/QuizControl';
 import DataRetrievalTest from './pages/TestPages/DataRetrievalTest';
 import UIPageTest from './pages/TestPages/UIPageTest';
 import Login from './pages/Login';
-import EditQuiz from './pages/EditQuiz';
 
 export default function Example() {
     return (

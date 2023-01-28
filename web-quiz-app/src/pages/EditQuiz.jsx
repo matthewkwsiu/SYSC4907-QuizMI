@@ -6,6 +6,7 @@ import HeaderInstructor from "../components/HeaderInstructor";
 import TextQuestion from "../components/TextQuestion";
 import MultipleSelectQuestion from "../components/MultipleSelectQuestion";
 import NumericalQuestion from "../components/NumericalQuestion";
+import MultipleChoiceQuestion from "../components/MultipleChoiceQuestion";
 import React, { useState } from 'react';
 
 function EditQuiz(){
@@ -16,7 +17,7 @@ function EditQuiz(){
             newQuestion = <TextQuestion></TextQuestion>;
         }
         if(question_type == 2){
-            // newQuestion = <></>;
+            newQuestion = <MultipleChoiceQuestion></MultipleChoiceQuestion>;
         }
         if(question_type == 3){
             newQuestion = <MultipleSelectQuestion></MultipleSelectQuestion>;
