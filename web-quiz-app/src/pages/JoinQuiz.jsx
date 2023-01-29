@@ -6,13 +6,11 @@ function JoinQuiz() {
     return (
         <div>
             <HeaderStudent></HeaderStudent>
-
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="quizID" placeholder="Enter Quiz ID Here"></input>
                 <button class="btn btn-primary" onClick={NavigateToQuiz}>Join</button>
             </div>
-
         </div>
     );
 }
