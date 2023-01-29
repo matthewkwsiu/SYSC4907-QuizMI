@@ -1,14 +1,11 @@
 import './App.css';
-import HeaderInstructor from "./components/HeaderInstructor";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
 function App() {
-    document.body.style = 'background: #282c34;';
     return (
-        <div className="App" style={{ background: "black" }}>
-            <div className="Header">
-                <HeaderInstructor></HeaderInstructor>
-            </div>
+        <div className="App">
             <header className="App-header">
                 <h1>QuizMI</h1>
                 <p>Welcome to the QuizMI Home Page!</p>
@@ -20,6 +17,7 @@ function App() {
                     These quizzes can be helpful for improving engagement in classses and
                     provide real-time feedback on student understanding.
                 </p>
+                <Link to="/login" className="btn btn-primary">Login</Link>
             </header>
         </div>
     );

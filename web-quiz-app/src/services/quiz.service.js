@@ -16,6 +16,9 @@ class QuizDataService {
     createInstructor(instructor) {
         return http.post("/instructors", instructor);
     }
+    createStudent(student) {
+        return http.post("/students", student);
+    }
 }
 
 export default new QuizDataService();

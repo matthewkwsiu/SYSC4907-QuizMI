@@ -7,7 +7,7 @@ class Login extends React.Component {
         this.state = {
             login: false,
             name: "",
-            isInstructor: false
+            isInstructor: true
         }
     }
     nameUpdate = (currentName) => {
@@ -23,7 +23,7 @@ class Login extends React.Component {
     }
 
     createUser(name) {
-        if(this.state.isInstructor){
+        if (this.state.isInstructor) {
             var instructor = {
                 instructor_name: name
             };
@@ -35,26 +35,29 @@ class Login extends React.Component {
                 .catch(e => {
                     console.log(e);
                 });
+            window.location.href = '/quizControl';
         } else {
-
+            var student = {
+                student_name: name
+            };
+            console.log(student.student_name)
+            QuizDataService.createStudent(student)
+                .then(response => {
+                    console.log("Created student" + student.student_name);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+            console.log("redirecting");
+            window.location.href = '/joinQuiz';
         }
-        // var instructor = {
-        //     instructor_name: name
-        // };
-        // console.log(instructor.instructor_name)
-        // QuizDataService.createInstructor(instructor)
-        //     .then(response => {
-        //         console.log("Created instructor" + instructor.instructor_name);
-        //     })
-        //     .catch(e => {
-        //         console.log(e);
-        //     });
-    }
 
+    }
 
     render() {
         return (
-            <form action="/quizControl">
+            <div>
+                <h1>Login</h1>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter Name" onChange={(e) => this.nameUpdate(e.target.value)}></input>
@@ -70,25 +73,25 @@ class Login extends React.Component {
                 <div class="form-group">
                     <label>User Type</label><br></br>
                     <label for="Instructor">
-                        <input type="radio" 
-                        id="isInstructor" 
-                        value="true" 
-                        checked={this.state.isInstructor} 
-                        onChange={() => this.isInstructorUpdate(true)} />
+                        <input type="radio"
+                            id="isInstructor"
+                            value="true"
+                            checked={this.state.isInstructor}
+                            onChange={() => this.isInstructorUpdate(true)} />
                         Instructor
                     </label><br></br>
                     <label for="Student">
-                        <input 
-                        type="radio" 
-                        id="isInstructor" 
-                        value="false" 
-                        checked={!this.state.isInstructor} 
-                        onChange={() => this.isInstructorUpdate(false)} />
+                        <input
+                            type="radio"
+                            id="isStudent"
+                            value="false"
+                            checked={!this.state.isInstructor}
+                            onChange={() => this.isInstructorUpdate(false)} />
                         Student
                     </label><br></br>
                 </div>
-                <button type="submit" class="btn btn-primary" onClick={this.createUser.bind(this, this.state.name, this.state.isInstructor)}>Submit</button>
-            </form>
+                <button class="btn btn-primary" onClick={this.createUser.bind(this, this.state.name, this.state.isInstructor)}>Submit</button>
+            </div>
         );
     }
 }
