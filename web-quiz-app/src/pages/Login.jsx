@@ -20,6 +20,7 @@ class Login extends React.Component {
         var instructor = {
             instructor_name: name
         };
+		localStorage.setItem("user", JSON.stringify(instructor.instructor_name))
         console.log(instructor.instructor_name)
         QuizDataService.createInstructor(instructor)
             .then(response => {

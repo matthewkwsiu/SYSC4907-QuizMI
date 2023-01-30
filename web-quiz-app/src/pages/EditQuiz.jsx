@@ -10,6 +10,7 @@ import MultipleChoiceQuestion from "../components/MultipleChoiceQuestion";
 import React, { useState } from 'react';
 
 function EditQuiz(){
+	const [quizName, setQuizName] = useState(JSON.parse(localStorage.getItem('lastSelectedQuiz')))
     const [questions, setQuestions] = useState([])
     const addQuestion = (question_type) => {
         var newQuestion;
@@ -33,7 +34,7 @@ function EditQuiz(){
             <HeaderInstructor></HeaderInstructor>
             <div className="EditQuiz">
                 <div id="edit-quiz-header">
-                    <a>Quiz Name</a>
+                    <a>{quizName}</a>
 
                     <div>
                         <a>Inactive </a>
@@ -82,7 +83,6 @@ function EditQuiz(){
         </div>
     );
 }
-
 
 function copyQuizId(){
     var copyText = document.getElementById("QuizIdLabel");
