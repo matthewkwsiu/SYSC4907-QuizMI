@@ -7,6 +7,7 @@ import TextQuestion from "../components/TextQuestion";
 import MultipleSelectQuestion from "../components/MultipleSelectQuestion";
 import NumericalQuestion from "../components/NumericalQuestion";
 import React, { useState } from 'react';
+import QuizDataService from "../services/quiz.service";
 
 function EditQuiz(){
     const [questions, setQuestions] = useState([])
@@ -26,7 +27,12 @@ function EditQuiz(){
         }
         setQuestions([...questions, newQuestion])
     };
-
+    const [activeStatus, setActiveStatus] = useState(false)
+    const toggleActiveStatus = () => {
+        console.log(activeStatus)
+        setActiveStatus(!activeStatus)
+        console.log(activeStatus)
+    }
     return(
         <div>
             <HeaderInstructor></HeaderInstructor>
@@ -37,7 +43,12 @@ function EditQuiz(){
                     <div>
                         <a>Inactive </a>
                         <label class="switch">
-                            <input type="checkbox"/>
+                            <input
+                                type="checkbox"
+                                onChange={(event) => setActiveStatus(event.currentTarget.checked)}
+                                checked={activeStatus}
+                            />
+
                             <span class="slider"></span>
                         </label>
                         <a> Active</a>
@@ -78,10 +89,47 @@ function EditQuiz(){
                     </Tabs>
                 </div>
             </div>
+            <button onClick={getQuizActiveStatus}>
+                Activate Lasers
+            </button>
+            <button onClick={toggleActiveStatus}>
+                Toggle Active Status
+            </button>
         </div>
     );
 }
 
+function getQuizActiveStatus(){
+    var quiz = QuizDataService.getQuiz(1)
+    .then(response => {
+        console.log("Get Quiz" + quiz);
+    })
+    .catch(e => {
+        console.log(e);
+    });
+    quiz.then((response) => response.json());
+    // .then((data) => console.log(""));
+    return quiz.active_status;
+}
+
+function toggleQuizActiveStatus(){
+    var quiz = QuizDataService.getQuiz(1)
+    .then(response => {
+        console.log("Get Quiz" + quiz);
+    })
+    .catch(e => {
+        console.log(e);
+    });
+    // toggle active_status value
+    quiz.active_status = 1 - quiz.active_status;
+    QuizDataService.updateQuiz(1, quiz)
+    .then(response => {
+        console.log("Get Quiz" + quiz.id);
+    })
+    .catch(e => {
+        console.log(e);
+    });
+}
 
 function copyQuizId(){
     var copyText = document.getElementById("QuizIdLabel");
