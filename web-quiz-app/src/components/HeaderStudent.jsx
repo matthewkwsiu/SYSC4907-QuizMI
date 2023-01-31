@@ -1,4 +1,5 @@
 import Nav from 'react-bootstrap/Nav';
+import { Outlet, Link } from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 function HeaderStudent() {
@@ -20,20 +21,14 @@ function HeaderStudent() {
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">
-            Home <span class="sr-only"></span>
-          </a>
+        <li class="nav-item">
+            <Link to="/" class="nav-link">Home</Link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            Join Quiz
-          </a>
+            <Link to="/joinQuiz" class="nav-link">Join Quiz</Link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            My Responses
-          </a>
+            <Link to="/#" class="nav-link">My Responses</Link>
         </li>
       </ul>
     </div>
