@@ -37,7 +37,11 @@ class Response(models.Model):
         'Student',
         on_delete=models.CASCADE,
     )
+    quiz = models.ForeignKey(
+        'Quiz',
+        on_delete=models.CASCADE,
+    )
     attempt_number = models.IntegerField()
     response_data = models.CharField(max_length=200)
-    grade_acheived = models.IntegerField()
+    grade_achieved = models.IntegerField()
 
