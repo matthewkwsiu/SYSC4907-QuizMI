@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
-
 import ErrorPage from './error-page';
 import QuizControl from './pages/QuizControl';
 import DataRetrievalTest from './pages/TestPages/DataRetrievalTest';

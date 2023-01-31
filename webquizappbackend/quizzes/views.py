@@ -14,8 +14,6 @@ from quizzes.models import Question
 from quizzes.serializers import QuestionSerializer
 from quizzes.models import Response
 from quizzes.serializers import ResponseSerializer
-
-
 # Create your views here.
 
 @api_view(['GET', 'POST', 'DELETE'])
