@@ -4,12 +4,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
-import EditQuiz from './pages/EditQuiz';
 import ErrorPage from './error-page';
 import QuizControl from './pages/QuizControl';
 import DataRetrievalTest from './pages/TestPages/DataRetrievalTest';
 import UIPageTest from './pages/TestPages/UIPageTest';
 import Login from './pages/Login';
+import EditQuiz from './pages/EditQuiz';
+import JoinQuiz from './pages/JoinQuiz';
 
 export default function Example() {
     return (
@@ -21,6 +22,7 @@ export default function Example() {
                 <Route path="testUI" element={<UIPageTest></UIPageTest>} />
                 <Route path="login" element={<Login />} />
                 <Route path="editQuiz" element={<EditQuiz />} />
+                <Route path="joinQuiz" element={<JoinQuiz />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </BrowserRouter>
