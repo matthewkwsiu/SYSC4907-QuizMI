@@ -27,6 +27,7 @@ class Login extends React.Component {
             var instructor = {
                 instructor_name: name
             };
+			localStorage.setItem("user", JSON.stringify(instructor.instructor_name))
             console.log(instructor.instructor_name)
             QuizDataService.createInstructor(instructor)
                 .then(response => {
@@ -40,6 +41,7 @@ class Login extends React.Component {
             var student = {
                 student_name: name
             };
+			localStorage.setItem("user", JSON.stringify(student.student_name))
             console.log(student.student_name)
             QuizDataService.createStudent(student)
                 .then(response => {
