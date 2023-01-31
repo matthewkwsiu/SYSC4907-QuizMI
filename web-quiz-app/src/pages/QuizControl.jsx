@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 function QuizControl() {
 	const [quizzes, setQuizzes] = useState();
-	const [loaded, setLoaded] = useState(true);
+	const [loaded, setLoaded] = useState(false);
 	
         return (
             <div>
@@ -18,7 +18,7 @@ function QuizControl() {
         );
 		
 	function retrieveAllQuizzes() {
-		if(loaded) {
+		if(!loaded) {
 			var allQuizzesOwned;
 			//Hardcoded instructor_id for now
 			QuizDataService.getInstructorQuizzes(1)
@@ -35,7 +35,7 @@ function QuizControl() {
 					document.getElementById('button-holder').appendChild(btn);
 					});
 
-				setLoaded(false);
+				setLoaded(true);
 			})
 			.catch(e => {
 				console.log(e);
@@ -66,7 +66,7 @@ function QuizControl() {
     btn.onclick = function () {
 		localStorage.setItem('lastSelectedQuiz', JSON.stringify(quiz.quiz_name));
         window.location.href = '/editQuiz';
-		setLoaded(true);
+		setLoaded(false);
     };
     btn.appendChild(t);
     document.getElementById('button-holder').appendChild(btn);
