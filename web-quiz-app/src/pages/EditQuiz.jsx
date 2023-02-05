@@ -27,12 +27,46 @@ function EditQuiz(){
         }
         setQuestions([...questions, newQuestion])
     };
-    const [activeStatus, setActiveStatus] = useState(false)
-    const toggleActiveStatus = () => {
-        console.log(activeStatus)
-        setActiveStatus(!activeStatus)
-        console.log(activeStatus)
+    const [activeStatus, setActiveStatus] = useState(0)
+
+    const getQuizActiveStatus = (quizID) => {
+        QuizDataService.getQuiz(quizID)
+        .then(response => {
+            setActiveStatus(response.data.active_status);
+        })
+        .catch(e => {
+            console.log(e);
+        });
     }
+
+    const toggleQuizActiveStatus = (quizID) =>{
+        var quiz 
+    
+        QuizDataService.getQuiz(quizID)
+        .then(response => {
+            quiz = response.data;
+        })
+        .catch(e => {
+            console.log(e);
+        }).then(() => {
+            setActiveStatus(1-activeStatus)
+            quiz.active_status = 1 - quiz.active_status;
+            console.log(quiz)
+        });
+        
+        QuizDataService.updateQuiz(quizID, quiz)
+        .then(response => {
+            console.log(response.data.active_status);
+    
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+
+
+    console.log(activeStatus)
+    console.log(getQuizActiveStatus(1))
     return(
         <div>
             <HeaderInstructor></HeaderInstructor>
@@ -45,13 +79,13 @@ function EditQuiz(){
                         <label class="switch">
                             <input
                                 type="checkbox"
-                                onChange={(event) => setActiveStatus(event.currentTarget.checked)}
-                                checked={activeStatus}
+                                checked={!!activeStatus}
                             />
 
                             <span class="slider"></span>
                         </label>
                         <a> Active</a>
+                        <p>{activeStatus}</p>
                     </div>
                     
                     <div>
@@ -89,47 +123,40 @@ function EditQuiz(){
                     </Tabs>
                 </div>
             </div>
-            <button onClick={getQuizActiveStatus}>
+            <button onClick={() => getQuizActiveStatus(1)}>
                 Activate Lasers
             </button>
-            <button onClick={toggleActiveStatus}>
+            <button onClick={() =>toggleQuizActiveStatus(1)}>
                 Toggle Active Status
             </button>
         </div>
     );
 }
 
-function getQuizActiveStatus(){
-    var quiz = QuizDataService.getQuiz(1)
-    .then(response => {
-        console.log("Get Quiz" + quiz);
-    })
-    .catch(e => {
-        console.log(e);
-    });
-    quiz.then((response) => response.json());
-    // .then((data) => console.log(""));
-    return quiz.active_status;
-}
 
-function toggleQuizActiveStatus(){
-    var quiz = QuizDataService.getQuiz(1)
-    .then(response => {
-        console.log("Get Quiz" + quiz);
-    })
-    .catch(e => {
-        console.log(e);
-    });
-    // toggle active_status value
-    quiz.active_status = 1 - quiz.active_status;
-    QuizDataService.updateQuiz(1, quiz)
-    .then(response => {
-        console.log("Get Quiz" + quiz.id);
-    })
-    .catch(e => {
-        console.log(e);
-    });
-}
+
+
+// function toggleQuizActiveStatus(quizID){
+//     var quiz 
+
+//     QuizDataService.getQuiz(quizID)
+//     .then(response => {
+//         quiz = response.data;
+//     })
+//     .catch(e => {
+//         console.log(e);
+//     });
+
+//     quiz.active_status = 1 - quiz.active_status;
+//     QuizDataService.updateQuiz(quizID, quiz)
+//     .then(response => {
+//         console.log(response.data.active_status);
+
+//     })
+//     .catch(e => {
+//         console.log(e);
+//     });
+// }
 
 function copyQuizId(){
     var copyText = document.getElementById("QuizIdLabel");
