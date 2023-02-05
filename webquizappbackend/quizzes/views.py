@@ -179,31 +179,8 @@ def questions_detail(request, questionId):
         question = QuestionSerializer(data=target)
         return JsonResponse({'message': '{} Question were returned successfully!'.format(question)}, status=status.HTTP_200_OK)
 
-# @api_view(['GET', 'DELETE'])
-# def questions_quiz_detail(request, quizId):
-#     try:
-#         questions = Question.objects.filter(quiz_id=quizId)
-#     except Question.DoesNotExist:
-#         return JsonResponse({'message': 'The question does not exist'}, status=status.HTTP_404_NOT_FOUND)
-#     if request.method == 'GET':
-#         questions_list = QuestionSerializer(data=questions)
-#         return JsonResponse({'message': '{} Questions were returned successfully!'.format(questions_list)}, status=status.HTTP_200_OK)
-#     elif request.method == 'DELETE':
-#         target = Question.objects.all().filter(quiz_id=quizId).delete()
-#         return JsonResponse({'message': '{} Questions were deleted successfully!'.format(target[0])}, status=status.HTTP_204_NO_CONTENT)
-
 @api_view(['GET', 'DELETE'])
 def questions_quiz_detail(request, quizId):
-    # try:
-    #     questions = Question.objects.filter(quiz_id=quizId)
-    # except Question.DoesNotExist:
-    #     return JsonResponse({'message': 'The question does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    # if request.method == 'GET':
-    #     questions_list = QuestionSerializer(data=questions)
-    #     return JsonResponse({'message': '{} Questions were returned successfully!'.format(questions_list)}, status=status.HTTP_200_OK)
-    # elif request.method == 'DELETE':
-    #     target = Question.objects.all().filter(quiz_id=quizId).delete()
-    #     return JsonResponse({'message': '{} Questions were deleted successfully!'.format(target[0])}, status=status.HTTP_204_NO_CONTENT)
     try:
         quiz = Quiz.objects.get(id=quizId)
     except Quiz.DoesNotExist:
