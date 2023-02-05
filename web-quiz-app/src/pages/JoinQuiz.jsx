@@ -1,7 +1,6 @@
 import HeaderStudent from "../components/HeaderStudent";
 import './css/QuizControl.css';
 import React from "react";
-import HeaderStudent from "../components/HeaderStudent";
 
 function JoinQuiz() {
     return (
@@ -17,7 +16,7 @@ function JoinQuiz() {
 }
 
 function NavigateToQuiz() {
-    window.location.href = '/joinQuiz/' + document.getElementById("quizID").value;
+    window.location.href = '/quizAnswer/' + document.getElementById("quizID").value;
 
 }
 

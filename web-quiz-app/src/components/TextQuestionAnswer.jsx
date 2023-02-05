@@ -2,7 +2,7 @@ import './css/TextQuestion.css'
 
 function TextQuestionAnswer(props) {
     return (
-        <form>
+        <div>
             <div class="form-group">
                 <label for="formGroupExampleInput">{getQuestion(props)}</label>
                 <input type="text" class="form-control" id="formGroupExampleInput" placeholder=""></input>
@@ -10,7 +10,7 @@ function TextQuestionAnswer(props) {
             <div class="submitAnswer">
                 <button type="submit" class="btn btn-primary">Done</button>
             </div>
-        </form>
+        </div>
     );
 }
 

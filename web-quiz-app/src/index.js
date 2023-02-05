@@ -24,7 +24,7 @@ export default function Example() {
                 <Route path="login" element={<Login />} />
                 <Route path="editQuiz" element={<EditQuiz />} />
                 <Route path="joinQuiz" element={<JoinQuiz />} />
-                <Route path="quizAnswer" element={<QuizAnswer/>} />
+                <Route path="quizAnswer/*" element={<QuizAnswer/>} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </BrowserRouter>
