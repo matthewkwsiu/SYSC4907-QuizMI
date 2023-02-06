@@ -9,7 +9,8 @@ class QuizAnswer extends React.Component {
         super(props);
         this.state = {
             questions: [],
-            questionsAdded: false
+            questionsAdded: false, 
+            children: []
         }
     }
 
@@ -25,10 +26,11 @@ class QuizAnswer extends React.Component {
 
     componentDidUpdate() {
         this.state.questions.forEach(function (q) {
-            // var ques = TextQuestionAnswer(q.question_text);
-            var para = document.createElement("p");
-            para.innerHTML = q.question_text;
+            var para = new TextQuestionAnswer(q.question_text);
+            // var para = document.createElement("p");
+            // para.innerHTML = q.question_text;
             document.getElementById('questions-holder').appendChild(para);
+            
         });
     }
 
@@ -38,6 +40,7 @@ class QuizAnswer extends React.Component {
                 <HeaderStudent></HeaderStudent>
                 <h1>Quiz {this.getId()} Questions</h1>
                 <div id="questions-holder"></div>
+                {this.props.children}
             </div>
         );
     }
