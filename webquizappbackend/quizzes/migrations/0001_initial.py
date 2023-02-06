@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('instructor_name', models.CharField(max_length=200)),
+                ('instructor_username', models.CharField(max_length=200, unique=True)),
+                ('instructor_password', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
@@ -24,6 +26,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('student_name', models.CharField(max_length=200)),
+                ('student_username', models.CharField(max_length=200, unique=True)),
+                ('student_password', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(

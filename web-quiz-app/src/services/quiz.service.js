@@ -16,15 +16,19 @@ class QuizDataService {
 	getInstructorQuizzes(instructorID) {
 		return http.get("/quizzes/instructor/" + instructorID)
 	}
-  createQuiz(quiz) {
+    createQuiz(quiz) {
        return http.post("/quizzes", quiz);
-  }
+    }
    createInstructor(instructor) {
        return http.post("/instructors", instructor);
-  }
-  createStudent(student) {
+    }
+    createStudent(student) {
        return http.post("/students", student);
-  }
+    }
+    getInstructorID(instructor_username) {
+        return http.get("/instructors/" + instructor_username);
+    }
+
 }
 
 export default new QuizDataService();

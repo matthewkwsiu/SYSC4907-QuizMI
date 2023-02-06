@@ -9,13 +9,13 @@ class InstructorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Instructor
-        fields = ('id','instructor_name',)
+        fields = ('id','instructor_name','instructor_username','instructor_password')
 
 class StudentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        fields = ('id','student_name')
+        fields = ('id','student_name','student_username','student_username')
 
 class QuizSerializer(serializers.ModelSerializer):
     instructor_id = serializers.IntegerField(style={'intput_type':'hidden'})

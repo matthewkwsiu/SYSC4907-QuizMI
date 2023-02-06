@@ -20,6 +20,13 @@ function QuizControl() {
 	function retrieveAllQuizzes() {
 		if(!loaded) {
 			var allQuizzesOwned;
+            QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
+            .then(response => {
+                console.log(response);
+            })
+            .catch(e => {
+                console.log(e)
+            });
 			//Hardcoded instructor_id for now
 			QuizDataService.getInstructorQuizzes(1)
 			.then(response => {
