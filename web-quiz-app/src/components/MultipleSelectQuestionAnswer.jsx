@@ -15,16 +15,13 @@ class MultipleSelectQuestionAnswer extends React.Component {
     }
     render() {
         return (
-            <form>
+            <div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">{this.state.question}</label>
                     <form id="multipleSelectForm">
                     </form>
                 </div>
-                <div class="submissionButton">
-                    <button type="submit" class="btn btn-primary">Done</button>
-                </div>
-            </form>
+            </div>
         );
     }
 }

@@ -1,15 +1,18 @@
 import HeaderStudent from "../components/HeaderStudent";
 import QuizDataService from "../services/quiz.service";
-import { useState, useEffect } from 'react';
+
 import React from "react";
 import TextQuestionAnswer from "../components/TextQuestionAnswer";
+import MultipleSelectQuestionAnswer from "../components/MultipleSelectQuestionAnswer";
+import NumericalQuestionAnswer from "../components/NumericalQuestionAnswer";
+import MultipleChoiceQuestionAnswer from "../components/MultipleChoiceQuestionAnswer";
+import Button from 'react-bootstrap/Button';
 
 class QuizAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questions: [],
-            questionsAdded: false
+            questions: []
         }
     }
 
@@ -23,23 +26,39 @@ class QuizAnswer extends React.Component {
             });
     }
 
-    componentDidUpdate() {
-        this.state.questions.forEach(function (q) {
-            // var ques = TextQuestionAnswer(q.question_text);
-            var para = document.createElement("p");
-            para.innerHTML = q.question_text;
-            document.getElementById('questions-holder').appendChild(para);
-        });
-    }
-
     render() {
         return (
             <div>
                 <HeaderStudent></HeaderStudent>
                 <h1>Quiz {this.getId()} Questions</h1>
-                <div id="questions-holder"></div>
+                {
+                    this.createQuestions()
+                }
+                <Button>Submit</Button>
             </div>
         );
+    }
+
+    createQuestions() {
+        return this.state.questions.map((q) => {
+            if (q.question_data == 1) {
+                return (
+                    <NumericalQuestionAnswer key={q.id} text={q.question_text} />
+                )
+            } else if (q.question_data == 2) {
+                return (
+                    <MultipleChoiceQuestionAnswer key={q.id} text={q.question_text} />
+                )
+            } else if (q.question_data == 3) {
+                return (
+                    <MultipleSelectQuestionAnswer key={q.id} text={q.question_text} />
+                )
+            } else {
+                return (
+                    <TextQuestionAnswer key={q.id} text={q.question_text} />
+                )
+            }
+        });
     }
 
     getId() {

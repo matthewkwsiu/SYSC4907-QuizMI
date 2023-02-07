@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class MultipleSelectQuestionAnswer extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -15,16 +14,13 @@ class MultipleSelectQuestionAnswer extends React.Component {
     }
     render() {
         return (
-            <form>
+            <div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">{this.state.question}</label>
                     <form id="multipleChoiceForm">
                     </form>
                 </div>
-                <div class="submissionButton">
-                    <button type="submit" class="btn btn-primary">Done</button>
-                </div>
-            </form>
+            </div>
         );
     }
 }
