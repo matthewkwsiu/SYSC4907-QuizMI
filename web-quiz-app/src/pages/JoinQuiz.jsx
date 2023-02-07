@@ -7,7 +7,7 @@ function JoinQuiz() {
         <div>
             <HeaderStudent></HeaderStudent>
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Quiz ID</label>
                 <input type="text" class="form-control" id="quizID" placeholder="Enter Quiz ID Here"></input>
                 <button class="btn btn-primary" onClick={NavigateToQuiz}>Join</button>
             </div>
@@ -16,7 +16,8 @@ function JoinQuiz() {
 }
 
 function NavigateToQuiz() {
-    window.location.href = '/joinQuiz/' + document.getElementById("quizID").value;
+    window.location.href = '/quizAnswer/' + document.getElementById("quizID").value;
+
 }
 
 export default JoinQuiz;

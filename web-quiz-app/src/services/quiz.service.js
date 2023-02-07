@@ -10,21 +10,21 @@ class QuizDataService {
 	createQuestion(question) {
 		return http.post("/questions", question);
 	}
+    getQuizQuestions(quizID){
+        return http.get("questions/quiz/" + quizID)
+    }
 	createQuiz(quiz) {
 		return http.post("/quizzes", quiz);
 	}
 	getInstructorQuizzes(instructorID) {
 		return http.get("/quizzes/instructor/" + instructorID)
 	}
-  createQuiz(quiz) {
-       return http.post("/quizzes", quiz);
-  }
-   createInstructor(instructor) {
-       return http.post("/instructors", instructor);
-  }
-  createStudent(student) {
-       return http.post("/students", student);
-  }
+    createInstructor(instructor) {
+        return http.post("/instructors", instructor);
+    }
+    createStudent(student) {
+        return http.post("/students", student);
+    }
 }
 
 export default new QuizDataService();
