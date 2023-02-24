@@ -13,7 +13,9 @@ class TextQuestionResponse extends React.Component {
     componentDidMount() {
         QuizDataService.getQuestion(this.props.question_id)
             .then(response => {
-                this.setState({ questionText: response.data.question_text });
+                var text = response.data.question_text;
+                var editedText = text.split("|||");
+                this.setState({ questionText: editedText[0] });
             })
             .catch(e => {
                 console.log(e);
