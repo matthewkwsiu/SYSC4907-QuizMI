@@ -30,7 +30,7 @@ class MyResponses extends React.Component {
         return (
             <div>
                 <HeaderStudent></HeaderStudent>
-                <h1>Student {this.getStudentName()} Responses</h1>
+                <h1>{this.getStudentName()}'s Responses</h1>
                 {
                     this.createQuestions()
                 }
