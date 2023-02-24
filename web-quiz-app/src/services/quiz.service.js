@@ -7,6 +7,9 @@ class QuizDataService {
 	getAllStudents() {
 		return http.get("/students");
 	}
+    getStudentFromUsername(username){
+        return http.get("students/username/" + username);
+    }
 	createQuestion(question) {
 		return http.post("/questions", question);
 	}

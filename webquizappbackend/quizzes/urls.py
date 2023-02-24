@@ -16,5 +16,6 @@ urlpatterns = [
     path('responses/student/<int:studentId>', views.response_list_with_student_Id),
     path('responses/question/<int:questionId>', views.response_list_with_question_Id),
     path('responses/quiz/<int:quizId>', views.response_list_with_quiz_Id),
+    path('students/username/<username>', views.username_getStudentFromUsername),
 ]
 

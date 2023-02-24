@@ -84,6 +84,17 @@ def student_detail(request, pk):
         student.delete()
         return JsonResponse({'message': 'Student was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['GET'])
+def username_getStudentFromUsername(request, username):
+    try:
+        student = Student.objects.get(student_name=username)
+    except Student.DoesNotExist:
+        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        student_serializer = StudentSerializer(student)
+        return JsonResponse(student_serializer.data)
+
 @api_view(['GET', 'POST', 'DELETE'])
 def quiz_list(request):
     if request.method == 'GET':
