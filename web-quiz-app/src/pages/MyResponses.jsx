@@ -30,7 +30,7 @@ class MyResponses extends React.Component {
         return (
             <div>
                 <HeaderStudent></HeaderStudent>
-                <h1>Student {this.getStudentId()} Responses</h1>
+                <h1>Student {this.getStudentName()} Responses</h1>
                 {
                     this.createQuestions()
                 }
@@ -50,6 +50,11 @@ class MyResponses extends React.Component {
     getStudentId() {
         var studentID = localStorage.getItem('studentID');
         return studentID;
+    }
+
+    getStudentName(){
+        var studentName = localStorage.getItem('user').replace(/['"]+/g, '');
+        return studentName;
     }
 }
 
