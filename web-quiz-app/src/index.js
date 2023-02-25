@@ -12,11 +12,8 @@ import CreateUser from './pages/CreateUser';
 import EditQuiz from './pages/EditQuiz';
 import JoinQuiz from './pages/JoinQuiz';
 import QuizAnswer from './pages/QuizAnswer';
-<<<<<<< HEAD
 import MyResponses from './pages/MyResponses';
-=======
 import LoginPage from './pages/LoginPage';
->>>>>>> 8ec2fc1 (Update Login page)
 
 export default function Example() {
     return (
@@ -30,11 +27,8 @@ export default function Example() {
                 <Route path="editQuiz" element={<EditQuiz />} />
                 <Route path="joinQuiz" element={<JoinQuiz />} />
                 <Route path="quizAnswer/*" element={<QuizAnswer/>} />
-<<<<<<< HEAD
                 <Route path="myResponses" element={<MyResponses/>} />
-=======
                 <Route path="login" element={<LoginPage/>} />
->>>>>>> 8ec2fc1 (Update Login page)
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </BrowserRouter>

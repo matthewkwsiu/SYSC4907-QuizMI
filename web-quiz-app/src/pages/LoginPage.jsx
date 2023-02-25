@@ -34,8 +34,16 @@ class LoginPage extends React.Component {
             };
 			localStorage.setItem("user", JSON.stringify(student.student_name))
             console.log(student.student_name)
-            console.log("redirecting");
-            window.location.href = '/joinQuiz';
+            QuizDataService.getStudentFromUsername(student.student_name)
+                .then(response => {
+                    console.log("Created student" + response.data.id);
+                    localStorage.setItem("studentID", JSON.stringify(response.data.id))
+                    console.log("redirecting");
+                    window.location.href = '/joinQuiz';
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         }
     }
 
