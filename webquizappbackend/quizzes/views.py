@@ -14,8 +14,6 @@ from quizzes.models import Question
 from quizzes.serializers import QuestionSerializer
 from quizzes.models import Response
 from quizzes.serializers import ResponseSerializer
-
-
 # Create your views here.
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -184,15 +182,24 @@ def questions_detail(request, questionId):
 @api_view(['GET', 'DELETE'])
 def questions_quiz_detail(request, quizId):
     try:
-        questions = Question.objects.filter(quiz_id=quizId)
-    except Question.DoesNotExist:
-        return JsonResponse({'message': 'The question does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        quiz = Quiz.objects.get(id=quizId)
+    except Quiz.DoesNotExist:
+        return JsonResponse({'message': 'The quiz does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
     if request.method == 'GET':
-        questions_list = QuestionSerializer(data=questions)
-        return JsonResponse({'message': '{} Questions were returned successfully!'.format(questions_list)}, status=status.HTTP_200_OK)
+        question = Question.objects.all().filter(quiz_id=quizId)
+
+        question_name = request.GET.get('question_name', None)
+        if question_name is not None:
+            question = question.filter(question_name__icontains=question_name)
+
+        question_serializer = QuestionSerializer(question, many=True)
+        return JsonResponse(question_serializer.data, safe=False)
+
     elif request.method == 'DELETE':
-        target = Question.objects.all().filter(quiz_id=quizId).delete()
-        return JsonResponse({'message': '{} Questions were deleted successfully!'.format(target[0])}, status=status.HTTP_204_NO_CONTENT)
+        count = Question.objects.all().filter(quiz_id=quizId).delete()
+        return JsonResponse({'message': '{} Question(s) were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['POST'])
 def response_list(request):

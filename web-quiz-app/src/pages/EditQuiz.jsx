@@ -6,10 +6,12 @@ import HeaderInstructor from "../components/HeaderInstructor";
 import TextQuestion from "../components/TextQuestion";
 import MultipleSelectQuestion from "../components/MultipleSelectQuestion";
 import NumericalQuestion from "../components/NumericalQuestion";
+import MultipleChoiceQuestion from "../components/MultipleChoiceQuestion";
 import React, { useState } from 'react';
 import QuizDataService from "../services/quiz.service";
 
 function EditQuiz(){
+	const [quizName, setQuizName] = useState(JSON.parse(localStorage.getItem('lastSelectedQuiz')))
     const [questions, setQuestions] = useState([])
     const addQuestion = (question_type) => {
         var newQuestion;
@@ -17,7 +19,7 @@ function EditQuiz(){
             newQuestion = <TextQuestion></TextQuestion>;
         }
         if(question_type == 2){
-            // newQuestion = <></>;
+            newQuestion = <MultipleChoiceQuestion></MultipleChoiceQuestion>;
         }
         if(question_type == 3){
             newQuestion = <MultipleSelectQuestion></MultipleSelectQuestion>;
@@ -72,7 +74,7 @@ function EditQuiz(){
             <HeaderInstructor></HeaderInstructor>
             <div className="EditQuiz">
                 <div id="edit-quiz-header">
-                    <a>Quiz Name</a>
+                    <a>{quizName}</a>
 
                     <div>
                         <a>Inactive </a>
@@ -136,6 +138,7 @@ function EditQuiz(){
 
 
 
+
 // function toggleQuizActiveStatus(quizID){
 //     var quiz 
 
@@ -157,6 +160,7 @@ function EditQuiz(){
 //         console.log(e);
 //     });
 // }
+
 
 function copyQuizId(){
     var copyText = document.getElementById("QuizIdLabel");

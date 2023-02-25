@@ -26,7 +26,6 @@ class QuizSerializer(serializers.ModelSerializer):
         
 class QuestionSerializer(serializers.ModelSerializer):
     quiz_id = serializers.IntegerField(style={'intput_type':'hidden'})
-
     class Meta:
         model = Question
         fields = ('id', 'question_data', 'question_text', 'question_total_marks', 'quiz_id')
