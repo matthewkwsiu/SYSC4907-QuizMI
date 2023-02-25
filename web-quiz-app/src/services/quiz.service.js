@@ -28,24 +28,24 @@ class QuizDataService {
 	getInstructorQuizzes(instructorID) {
 		return http.get("/quizzes/instructor/" + instructorID)
 	}
-  createInstructor(instructor) {
-     return http.post("/instructors", instructor);
-  }
-  createStudent(student) {
-     return http.post("/students", student);
-  }
-  getInstructorID(instructor_username) {
-      return http.get("/instructors/" + instructor_username);
-  }
-  crossCheckQuizID(quiz_name, instructor_username) {
-      return http.get("/quizzes/" + quiz_name + "/" + instructor_username)
-  }
-  getResponsesFromStudentID(studentID) {
-      return http.get("responses/student/" + studentID)
-  }
-  getResponsesFromQuizID(quizID) {
-      return http.get("responses/quiz/" + quizID)
-  }
+    createInstructor(instructor) {
+        return http.post("/instructors", instructor);
+    }
+    createStudent(student) {
+        return http.post("/students", student);
+    }
+    getInstructorID(instructor_username) {
+        return http.get("/instructors/" + instructor_username);
+    }
+    crossCheckQuizID(quiz_name, instructor_username) {
+        return http.get("/quizzes/" + quiz_name + "/" + instructor_username)
+    }
+    getResponsesFromStudentID(studentID) {
+        return http.get("responses/student/" + studentID)
+    }
+    getResponsesFromQuizID(quizID) {
+        return http.get("responses/quiz/" + quizID)
+    }
 }
 
 export default new QuizDataService();
