@@ -28,7 +28,7 @@ function HeaderStudent() {
             <Link to="/joinQuiz" class="nav-link">Join Quiz</Link>
         </li>
         <li class="nav-item">
-            <Link to="/#" class="nav-link">My Responses</Link>
+            <Link to="/myResponses" class="nav-link">My Responses</Link>
         </li>
       </ul>
     </div>

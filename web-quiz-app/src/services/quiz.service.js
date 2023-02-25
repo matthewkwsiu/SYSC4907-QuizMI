@@ -13,6 +13,9 @@ class QuizDataService {
 	createQuestion(question) {
 		return http.post("/questions", question);
 	}
+    getQuestion(questionID) {
+        return http.get("/questions/" + questionID);
+    }
     getQuizQuestions(quizID){
         return http.get("questions/quiz/" + quizID)
     }
@@ -27,6 +30,9 @@ class QuizDataService {
     }
     createStudent(student) {
         return http.post("/students", student);
+    }
+    getResponsesFromStudentID(studentID){
+        return http.get("responses/student/" + studentID)
     }
 }
 
