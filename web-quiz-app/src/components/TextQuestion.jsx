@@ -84,7 +84,7 @@ function TextQuestion() {
         console.log(quizID)
         var questionToCreate = {
             question_data: 1,
-            question_text: question + "|||" + solution,
+            question_text: question,
             question_total_marks: Number(totalMarks),
             quiz_id: quizID,
         };
