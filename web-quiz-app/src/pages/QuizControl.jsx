@@ -8,26 +8,34 @@ function QuizControl() {
     const [userID, setUserID] = useState();
 	const [quizzes, setQuizzes] = useState();
 	const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
+        .then(response => {
+            setUserID(response.data)
+        })
+        .catch(e => {
+            console.log(e)
+        });
+    }, [])
+
+    useEffect(() => {
+        if(userID) {
+            console.log("explain")
+            retrieveAllQuizzes()
+        }
+    }, [userID])
 	
         return (
             <div>
                 <HeaderInstructor></HeaderInstructor>
-				{retrieveAllQuizzes()}
                 <button onClick={generateQuizButton}>New Quiz</button>
                 <div id="button-holder"></div>
             </div>
         );
-		
+
 	function retrieveAllQuizzes() {
-		if(!loaded) {
-            QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
-            .then(response => {
-                setUserID(response.data)
-            })
-            .catch(e => {
-                console.log(e)
-            });
-            if(userID) {
+
                 QuizDataService.getInstructorQuizzes(userID)
                 .then(response => {
                     setQuizzes(response.data);
@@ -46,8 +54,8 @@ function QuizControl() {
                 .catch(e => {
                     console.log(e);
                 });
-            }
-		}
+
+		
 	}
 	
 	function generateQuizButton() {

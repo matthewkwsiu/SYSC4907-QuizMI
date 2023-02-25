@@ -16,9 +16,6 @@ class QuizDataService {
 	getInstructorQuizzes(instructorID) {
 		return http.get("/quizzes/instructor/" + instructorID)
 	}
-    createQuiz(quiz) {
-       return http.post("/quizzes", quiz);
-    }
    createInstructor(instructor) {
        return http.post("/instructors", instructor);
     }

@@ -20,8 +20,9 @@ function TextQuestion() {
     }, [totalMarks])
 
     useEffect(() => {
-        console.log(quizID)
-        createQuestion()
+        if(quizID != null) {
+            createQuestion()
+        }
     }, [quizID])
 
     useEffect(() => {
