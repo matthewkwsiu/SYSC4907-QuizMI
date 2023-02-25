@@ -42,18 +42,10 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-                <h1>Create New User</h1>
+                <h1>Login</h1>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter Name" onChange={(e) => this.nameUpdate(e.target.value)}></input>
-                </div>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter Username" />
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter Password" />
                 </div>
                 <div class="form-group">
                     <label>User Type</label><br></br>
