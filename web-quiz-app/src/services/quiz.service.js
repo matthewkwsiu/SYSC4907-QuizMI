@@ -7,9 +7,18 @@ class QuizDataService {
 	getAllStudents() {
 		return http.get("/students");
 	}
+    getStudentFromID(studentID) {
+        return http.get("students/" + studentID);
+    }
+    getStudentFromUsername(username) {
+        return http.get("students/username/" + username);
+    }
 	createQuestion(question) {
 		return http.post("/questions", question);
 	}
+    getQuestion(questionID) {
+        return http.get("/questions/" + questionID);
+    }
     getQuizQuestions(quizID){
         return http.get("questions/quiz/" + quizID)
     }
@@ -24,6 +33,12 @@ class QuizDataService {
     }
     createStudent(student) {
         return http.post("/students", student);
+    }
+    getResponsesFromStudentID(studentID) {
+        return http.get("responses/student/" + studentID)
+    }
+    getResponsesFromQuizID(quizID) {
+        return http.get("responses/quiz/" + quizID)
     }
 }
 

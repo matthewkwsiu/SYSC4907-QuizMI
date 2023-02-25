@@ -84,6 +84,17 @@ def student_detail(request, pk):
         student.delete()
         return JsonResponse({'message': 'Student was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['GET'])
+def username_getStudentFromUsername(request, username):
+    try:
+        student = Student.objects.get(student_name=username)
+    except Student.DoesNotExist:
+        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        student_serializer = StudentSerializer(student)
+        return JsonResponse(student_serializer.data)
+
 @api_view(['GET', 'POST', 'DELETE'])
 def quiz_list(request):
     if request.method == 'GET':
@@ -165,19 +176,23 @@ def questions_list(request):
 @api_view(['PUT', 'GET'])
 def questions_detail(request, questionId):
     try:
-        questions = Question.objects.get(id=questionId)
+        question = Question.objects.get(pk=questionId)
     except Question.DoesNotExist:
         return JsonResponse({'message': 'The question does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'PUT':
+
+    if request.method == 'GET':
+        question_serializer = QuestionSerializer(question)
+        return JsonResponse(question_serializer.data)
+    
+    elif request.method == 'PUT':
         question_data = JSONParser().parse(request)
-        question_serializer = QuestionSerializer(questions, data=question_data)
+        question_serializer = QuestionSerializer(question, data=question_data)
         if question_serializer.is_valid():
             question_serializer.save()
-            return JsonResponse(question_serializer.data, status=status.HTTP_200_OK)
-    elif request.method == 'GET':
-        target = Question.objects.all().filter(id=questionId)
-        question = QuestionSerializer(data=target)
-        return JsonResponse({'message': '{} Question were returned successfully!'.format(question)}, status=status.HTTP_200_OK)
+            return JsonResponse(question_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(question_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 @api_view(['GET', 'DELETE'])
 def questions_quiz_detail(request, quizId):
