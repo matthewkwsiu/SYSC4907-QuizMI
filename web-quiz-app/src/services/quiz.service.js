@@ -7,7 +7,10 @@ class QuizDataService {
 	getAllStudents() {
 		return http.get("/students");
 	}
-    getStudentFromUsername(username){
+    getStudentFromID(studentID) {
+        return http.get("students/" + studentID);
+    }
+    getStudentFromUsername(username) {
         return http.get("students/username/" + username);
     }
 	createQuestion(question) {
@@ -31,8 +34,11 @@ class QuizDataService {
     createStudent(student) {
         return http.post("/students", student);
     }
-    getResponsesFromStudentID(studentID){
+    getResponsesFromStudentID(studentID) {
         return http.get("responses/student/" + studentID)
+    }
+    getResponsesFromQuizID(quizID) {
+        return http.get("responses/quiz/" + quizID)
     }
 }
 
