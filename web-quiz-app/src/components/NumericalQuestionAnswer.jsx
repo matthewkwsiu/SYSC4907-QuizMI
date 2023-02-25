@@ -1,21 +1,25 @@
 import './css/NumericalQuestion.css'
+import React from "react";
 
-function NumericalQuestionAnswer(props) {
-    return (
-        <form>
-            <div class="form-group">
-                <label for="formGroupExampleInput">{getQuestion(props)}</label>
-                <input type="number" step="any" class="form-control" id="formGroupExampleInput2" placeholder=""></input>
-            </div>
-            <div class="submissionButton">
-                <button type="submit" class="btn btn-primary">Done</button>
-            </div>
-        </form>
-    );
-}
+class NumericalQuestionAnswer extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
-function getQuestion(props) {
-    return props.text;
+    render(){
+        return (
+            <div>
+                <div class="form-group">
+                   <label for="formGroupExampleInput">{this.getQuestionText(this.props)}</label>
+                <input type="number" step="any" class="form-control" id="formGroupExampleInput" placeholder=""></input>
+                </div>
+            </div>
+        );
+    }
+
+    getQuestionText(props) {
+        return props.text;
+    }
 }
 
 export default NumericalQuestionAnswer;

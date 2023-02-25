@@ -79,6 +79,16 @@ class Login extends React.Component {
                         console.log(this.state.login);
                     }); 
                     console.log("Created student" + student.student_name);
+                    QuizDataService.getStudentFromUsername(student.student_name)
+                        .then(response => {
+                            console.log("Created student" + response.data.id);
+                            localStorage.setItem("studentID", JSON.stringify(response.data.id))
+                            console.log("redirecting");
+                            window.location.href = '/joinQuiz';
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
                 })
                 .catch(e => {
                     this.setState({login:false}, () => {

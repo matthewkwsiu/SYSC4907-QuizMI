@@ -1,21 +1,25 @@
 import './css/TextQuestion.css'
+import React from "react";
 
-function TextQuestionAnswer(props) {
-    return (
-        <form>
-            <div class="form-group">
-                <label for="formGroupExampleInput">{getQuestion(props)}</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder=""></input>
-            </div>
-            <div class="submitAnswer">
-                <button type="submit" class="btn btn-primary">Done</button>
-            </div>
-        </form>
-    );
-}
+class TextQuestionAnswer extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
-function getQuestion(props) {
-    return props.text;
+    render(){
+        return (
+            <div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">{this.getQuestionText(this.props)}</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder=""></input>
+                </div>
+            </div>
+        );
+    }
+
+    getQuestionText(props) {
+        return props.text;
+    }
 }
 
 export default TextQuestionAnswer;

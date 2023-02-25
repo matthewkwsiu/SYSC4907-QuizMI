@@ -11,6 +11,8 @@ import UIPageTest from './pages/TestPages/UIPageTest';
 import Login from './pages/Login';
 import EditQuiz from './pages/EditQuiz';
 import JoinQuiz from './pages/JoinQuiz';
+import QuizAnswer from './pages/QuizAnswer';
+import MyResponses from './pages/MyResponses';
 
 export default function Example() {
     return (
@@ -23,6 +25,8 @@ export default function Example() {
                 <Route path="login" element={<Login />} />
                 <Route path="editQuiz" element={<EditQuiz />} />
                 <Route path="joinQuiz" element={<JoinQuiz />} />
+                <Route path="quizAnswer/*" element={<QuizAnswer/>} />
+                <Route path="myResponses" element={<MyResponses/>} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </BrowserRouter>
