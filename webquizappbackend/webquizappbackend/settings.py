@@ -65,7 +65,7 @@ ROOT_URLCONF = 'webquizappbackend.urls'
 
 REAL_BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-STATICFILES_DIRS = [os.path.join(REAL_BASE_DIR, 'frontend', 'build', 'static')]
+#STATICFILES_DIRS = [os.path.join(REAL_BASE_DIR, 'frontend', 'build', 'static')]
 
 TEMPLATES = [
     {

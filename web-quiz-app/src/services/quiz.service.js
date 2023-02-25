@@ -34,6 +34,12 @@ class QuizDataService {
     createStudent(student) {
         return http.post("/students", student);
     }
+    getInstructorID(instructor_username) {
+        return http.get("/instructors/" + instructor_username);
+    }
+    crossCheckQuizID(quiz_name, instructor_username) {
+        return http.get("/quizzes/" + quiz_name + "/" + instructor_username)
+    }
     getResponsesFromStudentID(studentID) {
         return http.get("responses/student/" + studentID)
     }

@@ -4,9 +4,13 @@ from django.db import models
 
 class Instructor(models.Model):
     instructor_name = models.CharField(max_length=200)
+    instructor_username = models.CharField(max_length=200, unique=True)
+    instructor_password = models.CharField(max_length=200)
 
 class Student(models.Model):
     student_name = models.CharField(max_length=200)
+    student_username = models.CharField(max_length=200, unique=True)
+    student_password = models.CharField(max_length=200)
 
 class Quiz(models.Model):
     instructor = models.ForeignKey(

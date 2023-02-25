@@ -3,10 +3,12 @@ from quizzes import views
 
 urlpatterns = [
     path('instructors', views.instructor_list),
+    path('instructors/<pk>', views.instructor_detail),
     path('students', views.student_list),
     path('students/<int:pk>', views.student_detail),
     path('students/username/<username>', views.username_getStudentFromUsername),
     path('quizzes', views.quiz_list), 
+    path('quizzes/<quiz_name>/<username>', views.username_quizNameCrossCheck),
     path('quizzes/<int:pk>', views.quiz_detail), 
     path('quizzes/instructor/<int:instructorId>', views.quiz_list_owned_by_instructor),
     path('questions', views.questions_list),

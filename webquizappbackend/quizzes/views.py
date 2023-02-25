@@ -16,6 +16,28 @@ from quizzes.models import Response
 from quizzes.serializers import ResponseSerializer
 # Create your views here.
 
+@api_view(['GET'])
+def username_quizNameCrossCheck(request, quiz_name, username):
+    try:
+        quiz = Quiz.objects.get(instructor_id=username, quiz_name=quiz_name)
+    except Quiz.DoesNotExist:
+        return JsonResponse({'message': 'The quiz does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        quiz_serializer = QuizSerializer(quiz)
+        return JsonResponse(quiz_serializer.data['id'], status=status.HTTP_201_CREATED, safe=False) 
+
+@api_view(['GET'])
+def instructor_detail(request, pk):
+    try:
+        instructor = Instructor.objects.get(instructor_username=pk)
+    except Instructor.DoesNotExist:
+        return JsonResponse({'message': 'The instructor does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        instructor_serializer = InstructorSerializer(instructor)
+        return JsonResponse(instructor_serializer.data['id'], status=status.HTTP_201_CREATED, safe=False)
+
 @api_view(['GET', 'POST', 'DELETE'])
 def instructor_list(request):
     if request.method == 'GET':
