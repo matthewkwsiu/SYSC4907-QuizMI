@@ -8,6 +8,7 @@ import MultipleSelectQuestion from "../components/MultipleSelectQuestion";
 import NumericalQuestion from "../components/NumericalQuestion";
 import MultipleChoiceQuestion from "../components/MultipleChoiceQuestion";
 import React, { useState } from 'react';
+import QuizResponses from "./QuizResponses";
 
 function EditQuiz(){
 	const [quizName, setQuizName] = useState(JSON.parse(localStorage.getItem('lastSelectedQuiz')))
@@ -75,7 +76,7 @@ function EditQuiz(){
                             </div>
                         </Tab>
                         <Tab eventKey="responses" title="Responses">
-                            <a>Here are the responses</a>
+                            <QuizResponses quiz_id={30}/>
                         </Tab>
                     </Tabs>
                 </div>
