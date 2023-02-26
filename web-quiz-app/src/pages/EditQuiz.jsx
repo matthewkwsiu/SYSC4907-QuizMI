@@ -76,7 +76,7 @@ function EditQuiz(){
                             </div>
                         </Tab>
                         <Tab eventKey="responses" title="Responses">
-                            <QuizResponses quiz_id={30}/>
+                            <QuizResponses quiz_id={1}/>
                         </Tab>
                     </Tabs>
                 </div>
