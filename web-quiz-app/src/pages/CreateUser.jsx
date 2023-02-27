@@ -1,7 +1,7 @@
 import React from 'react';
 import QuizDataService from "../services/quiz.service";
 
-class Login extends React.Component {
+class CreateUser extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -141,4 +141,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default CreateUser;
