@@ -16,6 +16,7 @@ function App() {
                     These quizzes can be helpful for improving engagement in classses and
                     provide real-time feedback on student understanding.
                 </p>
+                <Link to="/createUser" className="btn btn-primary">Create New User</Link>
                 <Link to="/login" className="btn btn-primary">Login</Link>
             </header>
         </div>

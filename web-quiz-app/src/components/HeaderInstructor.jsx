@@ -24,7 +24,7 @@ function HeaderInstructor() {
                     Profile
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/login">My Profile</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/#">My Profile</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Switch Account</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
                 </Dropdown.Menu>
