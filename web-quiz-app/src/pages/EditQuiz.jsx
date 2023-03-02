@@ -55,24 +55,39 @@ function EditQuiz(){
             newQuestion = <MultipleSelectQuestion></MultipleSelectQuestion>;
         }
         if(question_type == 4){
-            newQuestion = <NumericalQuestion></NumericalQuestion>;
+            newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={false}></NumericalQuestion>;
         }
         setQuestions([...questions, newQuestion])
     };
 
     function loadAllQuestions() {
-        QuizDataService.getQuizQuestions(quizID)
-        .then(response => {
-            var questionsToBeAdded = []
-            response.data.forEach(function (e) {
-                var newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} question={e.question_text} marks={e.question_total_marks}></TextQuestion>;
-                questionsToBeAdded.push(newQuestion)
+        if(quizID) {
+            QuizDataService.getQuizQuestions(quizID)
+            .then(response => {
+                var questionsToBeAdded = []
+                response.data.forEach(function (e) {
+                    var newQuestion;
+                    console.log(e.question_data)
+                    switch(e.question_data) {
+                        case 1:
+                            newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} question={e.question_text} marks={e.question_total_marks}></TextQuestion>;
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={true} question={e.question_text} marks={e.question_total_marks}></NumericalQuestion>;
+                            break;
+                    }
+                    questionsToBeAdded.push(newQuestion)
+                })
+                setQuestions([...questions, questionsToBeAdded])
             })
-            setQuestions([...questions, questionsToBeAdded])
-        })
-        .catch(e => {
-            console.log(e)
-        })
+            .catch(e => {
+                console.log(e)
+            })
+        }
     }
     
     function copyQuizId(){
