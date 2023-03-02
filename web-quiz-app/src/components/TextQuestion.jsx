@@ -8,12 +8,14 @@ function TextQuestion(props) {
     const [quizID, setQuizID] = useState();
     const [question, setQuestion] = useState('');
     const [solution, setSolution] = useState('');
+    const [questionID, setQuestionID] = useState();
     const [loadQuestion, setLoad] = useState(false);
 
     useEffect(() => {
         setUserID(props.insID)
         setQuizID(props.qID)
         if(props.load) {
+            setQuestionID(props.questionID)
             setQuestion(props.question)
             setMarks(props.marks)
             setLoad(true)
@@ -36,7 +38,7 @@ function TextQuestion(props) {
             <div class="form-group">
                 <label for="formGroupExampleInput">Question Title</label>
                 {loadQuestion
-                ? <input type="text" class="form-control" id="formGroupExampleInput" value={question} onChange={event => setQuestionName(event.target.value)}></input>
+                ? <input type="text" class="form-control" id="formGroupExampleInput" value={question} onChange={event => setQuestionName(event.target.value) }></input>
                 : <input type="text" class="form-control" id="formGroupExampleInput" placeholder="What is Java?" onChange={event => setQuestionName(event.target.value)}></input>
                 }
             </div>
@@ -78,18 +80,29 @@ function TextQuestion(props) {
     function createQuestion() {
         console.log(quizID)
         var questionToCreate = {
-            question_data: 4,
+            question_data: 1,
             question_text: question,
             question_total_marks: Number(totalMarks),
             quiz_id: quizID,
         };
-        QuizDataService.createQuestion(questionToCreate)
+        if(loadQuestion) {
+            QuizDataService.updateQuestion(questionID, questionToCreate)
             .then(response => {
                 console.log(questionToCreate);
             })
             .catch(e => {
                 console.log(e);
             });
+        }
+        else {
+            QuizDataService.createQuestion(questionToCreate)
+                .then(response => {
+                    console.log(questionToCreate);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        }
     }
 }
 export default TextQuestion;

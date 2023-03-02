@@ -70,14 +70,14 @@ function EditQuiz(){
                     console.log(e.question_data)
                     switch(e.question_data) {
                         case 1:
-                            newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} question={e.question_text} marks={e.question_total_marks}></TextQuestion>;
+                            newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} marks={e.question_total_marks}></TextQuestion>;
                             break;
                         case 2:
                             break;
                         case 3:
                             break;
                         case 4:
-                            newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={true} question={e.question_text} marks={e.question_total_marks}></NumericalQuestion>;
+                            newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} marks={e.question_total_marks}></NumericalQuestion>;
                             break;
                     }
                     questionsToBeAdded.push(newQuestion)

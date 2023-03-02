@@ -207,6 +207,7 @@ def questions_detail(request, questionId):
         return JsonResponse(question_serializer.data)
     
     elif request.method == 'PUT':
+        print(questionId)
         question_data = JSONParser().parse(request)
         question_serializer = QuestionSerializer(question, data=question_data)
         if question_serializer.is_valid():
