@@ -16,7 +16,6 @@ function EditQuiz(){
     const [questions, setQuestions] = useState([])
     const [userID, setUserID] = useState();
     const [quizID, setQuizID] = useState();
-    const [questionData, setQuestionData] = useState();
 
     useEffect(() => {
         QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
@@ -39,17 +38,6 @@ function EditQuiz(){
             })
         }
     }, [userID])
-
-    useEffect(() => {
-        if(questionData) {
-            var questionsToBeAdded = []
-            for(let i = 0; i < questionData.length; i++) {
-                var newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} question={questionData[i].question_text} marks={questionData[i].question_total_marks}></TextQuestion>;
-                questionsToBeAdded[i] = newQuestion
-            }
-            setQuestions([...questions, questionsToBeAdded])
-        }
-    }, [questionData])
 
     useEffect(() => {
         loadAllQuestions()
@@ -75,7 +63,12 @@ function EditQuiz(){
     function loadAllQuestions() {
         QuizDataService.getQuizQuestions(quizID)
         .then(response => {
-            setQuestionData(response.data)
+            var questionsToBeAdded = []
+            response.data.forEach(function (e) {
+                var newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} question={e.question_text} marks={e.question_total_marks}></TextQuestion>;
+                questionsToBeAdded.push(newQuestion)
+            })
+            setQuestions([...questions, questionsToBeAdded])
         })
         .catch(e => {
             console.log(e)
