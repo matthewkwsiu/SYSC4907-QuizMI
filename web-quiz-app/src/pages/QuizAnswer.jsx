@@ -9,11 +9,21 @@ import MultipleChoiceQuestionAnswer from "../components/MultipleChoiceQuestionAn
 import Button from 'react-bootstrap/Button';
 
 class QuizAnswer extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            questions: []
+            questions: [],
+            value: ''
         }
+
+
+        this.handleChange = this.handleChange.bind(this);
+
+    }
+
+    handleChange(newValue){
+        this.setState({value: newValue})
     }
 
     componentDidMount() {
@@ -34,7 +44,7 @@ class QuizAnswer extends React.Component {
                 {
                     this.createQuestions()
                 }
-                <Button>Submit</Button>
+                <Button onClick={this.submitResponses.bind(this)}>Submit</Button>
             </div>
         );
     }
@@ -55,7 +65,10 @@ class QuizAnswer extends React.Component {
                 )
             } else {
                 return (
-                    <TextQuestionAnswer key={q.id} text={q.question_text} />
+                    <TextQuestionAnswer key={q.id} 
+                    value={this.state.value}
+                    onInputChange={this.handleChange}
+                    text={q.question_text} />
                 )
             }
         });
@@ -66,6 +79,13 @@ class QuizAnswer extends React.Component {
         var splitCurrentUrl = currentUrl.split("quizAnswer/");
         var currentId = splitCurrentUrl[1];
         return currentId;
+    }
+
+    submitResponses() {
+        this.state.questions.map((q) => {
+            console.log(q.id);
+        });
+        console.log(this.state.value);
     }
 }
 
