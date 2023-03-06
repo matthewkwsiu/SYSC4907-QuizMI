@@ -17,6 +17,7 @@ function NumericalQuestion(props) {
         if(props.load) {
             setQuestionID(props.questionID)
             setQuestion(props.question)
+            setSolution(props.solution)
             setMarks(props.marks)
             setLoad(true)
         }
@@ -55,6 +56,7 @@ function NumericalQuestion(props) {
             question_text: question,
             question_total_marks: Number(totalMarks),
             quiz_id: quizID,
+            question_solution: solution,
         };
         if(loadQuestion) {
             QuizDataService.updateQuestion(questionID, questionToCreate)
@@ -66,7 +68,6 @@ function NumericalQuestion(props) {
             });
         }
         else {
-            console.log(questionToCreate)
             QuizDataService.createQuestion(questionToCreate)
                 .then(response => {
                     console.log(questionToCreate);
@@ -83,13 +84,16 @@ function NumericalQuestion(props) {
             <div class="form-group">
                 <label for="formGroupExampleInput">Question Title</label>
                 {loadQuestion
-                ? <input type="text" class="form-control" id="formGroupExampleInput" value={question} onChange={event => setQuestion(event.target.value)}></input>
-                : <input type="text" class="form-control" id="formGroupExampleInput" placeholder="What is the max value of a 32-bit signed int?" onChange={event => setQuestion(event.target.value)}></input>
+                ? <input type="text" class="form-control" id="formGroupExampleInput" value={question} onChange={event => setQuestionName(event.target.value)}></input>
+                : <input type="text" class="form-control" id="formGroupExampleInput" placeholder="What is the max value of a 32-bit signed int?" onChange={event => setQuestionName(event.target.value)}></input>
                 }
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Solution</label>
-                <input type="number" step="any" class="form-control" id="formGroupExampleInput2" placeholder="2147483647"></input>
+                {loadQuestion
+                ? <input type="number" step="any" class="form-control" id="formGroupExampleInput2" placeholder="2147483647" value={solution} onChange={event => setSolutionResult(event.target.value)}></input>
+                : <input type="number" step="any" class="form-control" id="formGroupExampleInput2" placeholder="2147483647" onChange={event => setSolutionResult(event.target.value)}></input>
+                }
             </div>
         </form>
         <div class="form-group row">
