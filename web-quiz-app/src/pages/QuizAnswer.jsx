@@ -14,7 +14,7 @@ class QuizAnswer extends React.Component {
         super(props);
         this.state = {
             questions: [],
-            value: ''
+            value: new Map()
         }
 
 
@@ -22,25 +22,29 @@ class QuizAnswer extends React.Component {
 
     }
 
-    handleChange(newValue){
-        this.setState({value: newValue})
+    handleChange(questionId, newValue){
+        this.setState({value: new Map(this.state.value.set(questionId, newValue))})
     }
 
     componentDidMount() {
-        QuizDataService.getQuizQuestions(this.getId())
+        QuizDataService.getQuizQuestions(this.getQuizId())
             .then(response => {
                 this.setState({ questions: (response.data) });
+                this.state.questions.map((q) => {
+                    this.setState({value: new Map(this.state.value.set(q.id, ''))})
+                });
             })
             .catch(e => {
                 console.log(e);
             });
+        
     }
 
     render() {
         return (
             <div>
                 <HeaderStudent></HeaderStudent>
-                <h1>Quiz {this.getId()} Questions</h1>
+                <h1>Quiz {this.getQuizId()} Questions</h1>
                 {
                     this.createQuestions()
                 }
@@ -65,27 +69,57 @@ class QuizAnswer extends React.Component {
                 )
             } else {
                 return (
-                    <TextQuestionAnswer key={q.id} 
-                    value={this.state.value}
-                    onInputChange={this.handleChange}
-                    text={q.question_text} />
+                    <TextQuestionAnswer 
+                        key={q.id} 
+                        questionId={q.id}
+                        value={this.state.value.get(q.id)}
+                        onInputChange={this.handleChange}
+                        text={q.question_text} 
+                    />
                 )
             }
         });
     }
 
-    getId() {
+    getQuizId() {
         var currentUrl = window.location.href;
         var splitCurrentUrl = currentUrl.split("quizAnswer/");
         var currentId = splitCurrentUrl[1];
         return currentId;
     }
 
+    getStudentId() {
+        var studentID = localStorage.getItem('studentID');
+        return studentID;
+    }
+
     submitResponses() {
-        this.state.questions.map((q) => {
-            console.log(q.id);
-        });
-        console.log(this.state.value);
+        const iterator1 = this.state.value.keys();
+        for(let i = 0; i < this.state.value.size; i++){
+            var k = iterator1.next().value;
+            // console.log(k, this.state.value.get(k));
+            this.sendResponsesToDatabase(k, this.state.value.get(k));
+        }
+    }
+
+    sendResponsesToDatabase(questionId, responseData) {
+            var studentResponse = {
+                attempt_number: 1,
+                response_data: responseData,
+                grade_achieved: 0,
+                student_id: this.getStudentId(),
+                question_id: questionId, 
+                quiz_id: this.getQuizId()
+            };
+            // console.log(studentResponse);
+
+            QuizDataService.createResponse(studentResponse)
+                .then(response => {
+                    console.log("Created response: " + studentResponse.response_data);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
     }
 }
 

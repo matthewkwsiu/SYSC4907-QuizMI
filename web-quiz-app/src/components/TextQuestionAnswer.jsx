@@ -10,7 +10,7 @@ class TextQuestionAnswer extends React.Component {
 
     handleChange(event) {
         // this.setState({value: event.target.value});
-        this.props.onInputChange(event.target.value);
+        this.props.onInputChange(this.props.questionId, event.target.value);
     }
 
     render(){

@@ -46,6 +46,9 @@ class QuizDataService {
     getResponsesFromQuizID(quizID) {
         return http.get("responses/quiz/" + quizID)
     }
+    createResponse(response){
+        return http.post("/responses", response);
+    }
 }
 
 export default new QuizDataService();
