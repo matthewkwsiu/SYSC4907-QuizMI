@@ -17,6 +17,7 @@ function TextQuestion(props) {
         if(props.load) {
             setQuestionID(props.questionID)
             setQuestion(props.question)
+            setSolution(props.solution)
             setMarks(props.marks)
             setLoad(true)
         }
@@ -44,7 +45,10 @@ function TextQuestion(props) {
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Solution</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="A programming language" onChange={event => setSolutionResult(event.target.value)}></input>
+                {loadQuestion
+                ? <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="A programming language" value={solution} onChange={event => setSolutionResult(event.target.value)}></input>
+                : <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="A programming language" onChange={event => setSolutionResult(event.target.value)}></input>
+                }
             </div>
         </form>
         <div class="form-group row">
@@ -84,6 +88,7 @@ function TextQuestion(props) {
             question_text: question,
             question_total_marks: Number(totalMarks),
             quiz_id: quizID,
+            question_solution: solution,
         };
         if(loadQuestion) {
             QuizDataService.updateQuestion(questionID, questionToCreate)
