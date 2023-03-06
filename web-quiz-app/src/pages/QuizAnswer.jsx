@@ -37,7 +37,6 @@ class QuizAnswer extends React.Component {
             .catch(e => {
                 console.log(e);
             });
-        
     }
 
     render() {
@@ -57,7 +56,13 @@ class QuizAnswer extends React.Component {
         return this.state.questions.map((q) => {
             if (q.question_data == 1) {
                 return (
-                    <NumericalQuestionAnswer key={q.id} text={q.question_text} />
+                    <NumericalQuestionAnswer 
+                        key={q.id} 
+                        questionId={q.id}
+                        value={this.state.value.get(q.id)}
+                        onInputChange={this.handleChange}
+                        text={q.question_text} 
+                    />
                 )
             } else if (q.question_data == 2) {
                 return (

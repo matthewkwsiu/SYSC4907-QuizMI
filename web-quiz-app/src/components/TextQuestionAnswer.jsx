@@ -1,6 +1,5 @@
 import './css/TextQuestion.css'
 import React from "react";
-import { forwardRef, useImperativeHandle } from 'react';
 
 class TextQuestionAnswer extends React.Component {
     constructor(props){
@@ -9,7 +8,6 @@ class TextQuestionAnswer extends React.Component {
     }
 
     handleChange(event) {
-        // this.setState({value: event.target.value});
         this.props.onInputChange(this.props.questionId, event.target.value);
     }
 
@@ -18,7 +16,7 @@ class TextQuestionAnswer extends React.Component {
             <div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">{this.getQuestionText(this.props)}</label>
-                    <input type="text" value={this.props.value} onChange={this.handleChange} class="form-control" id="formGroupExampleInput" placeholder=""></input>
+                    <input type="text" value={this.props.value} onChange={this.handleChange} class="form-control" id="formGroupExampleInput"></input>
                 </div>
             </div>
         );
