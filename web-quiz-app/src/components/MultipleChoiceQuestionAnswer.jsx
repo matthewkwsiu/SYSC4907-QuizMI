@@ -41,8 +41,6 @@ class MultipleChoiceQuestionAnswer extends React.Component {
             )
         });
     }
-
 }
-
 
 export default MultipleChoiceQuestionAnswer;

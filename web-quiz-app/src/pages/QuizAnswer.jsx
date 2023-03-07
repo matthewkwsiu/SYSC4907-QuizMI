@@ -16,7 +16,6 @@ class QuizAnswer extends React.Component {
             questions: [],
             value: new Map()
         }
-
         this.handleChange = this.handleChange.bind(this);
     }
 

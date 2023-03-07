@@ -60,8 +60,6 @@ class MultipleSelectQuestionAnswer extends React.Component {
             )
         });
     }
-
-    
 }
 
 export default MultipleSelectQuestionAnswer;
