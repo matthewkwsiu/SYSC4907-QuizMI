@@ -17,9 +17,7 @@ class QuizAnswer extends React.Component {
             value: new Map()
         }
 
-
         this.handleChange = this.handleChange.bind(this);
-
     }
 
     handleChange(questionId, newValue){

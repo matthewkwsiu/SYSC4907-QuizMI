@@ -14,7 +14,7 @@ class RadioInput extends React.Component {
         return (
             <div>
                 <input type="radio" value={this.props.selection} onChange={this.handleChange} name={this.props.questionId}></input>
-                <label for="formGroupExampleInput">{this.props.selection}</label>
+                <label htmlFor="formGroupExampleInput">{this.props.selection}</label>
                 <br></br>
             </div>
         );

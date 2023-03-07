@@ -15,7 +15,7 @@ class TextQuestionAnswer extends React.Component {
         return (
             <div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">{this.getQuestionText(this.props)}</label>
+                    <label htmlFor="formGroupExampleInput">{this.getQuestionText(this.props)}</label>
                     <input type="text" value={this.props.value} onChange={this.handleChange} class="form-control" id="formGroupExampleInput"></input>
                 </div>
             </div>

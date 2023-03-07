@@ -15,7 +15,7 @@ class NumericalQuestionAnswer extends React.Component {
         return (
             <div>
                 <div class="form-group">
-                   <label for="formGroupExampleInput">{this.getQuestionText(this.props)}</label>
+                   <label htmlFor="formGroupExampleInput">{this.getQuestionText(this.props)}</label>
                     <input type="number" value={this.props.value} onChange={this.handleChange} step="any" class="form-control" id="formGroupExampleInput"></input>
                 </div>
             </div>
