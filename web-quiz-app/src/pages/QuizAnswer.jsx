@@ -113,7 +113,6 @@ class QuizAnswer extends React.Component {
             var k = iterator1.next().value;
             this.sendResponsesToDatabase(k, this.state.value.get(k));
         }
-        window.alert("Submission in progress");
         setTimeout(function(){
             window.alert("Quiz Submitted");
             // window.location.href = '/joinQuiz';
