@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import QuizDataService from "../services/quiz.service";
 
-function MultipleChoiceQuestion() {
+function MultipleChoiceQuestion(props) {
   const [inputFields, setInputFields] = useState([
     { option: ""},
   ]);
+  const [questionName, setQuestionName] = useState();
+  const [solution, setSolution] = useState();
+  const [userID, setUserID] = useState();
+  const [quizID, setQuizID] = useState();
+  const [totalMarks, setMarks] = useState();
   const [count, setCount] = useState(1)
+
+  useEffect(() => {
+    setUserID(props.insID)
+    setQuizID(props.qID)
+}, [])
+  
   const addFields = () => {
 	  if(count < 7) {
 		let newfield = { option: ""};
@@ -31,6 +43,41 @@ function MultipleChoiceQuestion() {
 	  data[index][event.target.name]=event.target.value;
 	  setInputFields(data);
   }
+
+  function submit() {
+    createQuestion()
+}
+
+function createQuestion() {
+    var choiceData = "";
+    var solutionText = "";
+    for(let i = 0; i < inputFields.length; i++) {
+        if(solution == i) {
+            solutionText = inputFields[i].option
+        }
+        choiceData = choiceData + inputFields[i].option + ","
+    }
+    var questionText = questionName + "|||" + choiceData
+
+    var questionToCreate = {
+        question_data: 2,
+        question_text: questionText,
+        question_total_marks: Number(totalMarks),
+        quiz_id: quizID,
+        question_solution: solutionText,
+    };
+
+    console.log(questionToCreate)
+
+    QuizDataService.createQuestion(questionToCreate)
+                .then(response => {
+                    console.log(questionToCreate);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+}
+
   return (
     <div className="MultipleChoice">
       <form>
@@ -46,6 +93,7 @@ function MultipleChoiceQuestion() {
                 type="text"
                 class="form-control"
                 id="floatingQuestion"
+                onChange={event => setQuestionName(event.target.value) }
               ></input>
               <label for="floatingQuestion">Question</label>
             </div>
@@ -83,6 +131,7 @@ function MultipleChoiceQuestion() {
                     class="form-check-input"
 					name="radioButton"
                     type="radio"
+                    onClick={() => setSolution(index) }
                   />
                 </div>
                 <div class="col">
@@ -97,11 +146,19 @@ function MultipleChoiceQuestion() {
           );
         })}
       </form>
+      <div class="form-group row">
+            <div class="numberSlider">
+                <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" onChange={event => setMarks(event.target.value)}></input>
+            </div>
+        </div>
       <div class="submission">
         <button type="submit" class="btn btn-primary" onClick={addFields}>
           Add More..
         </button>
       </div>
+      <div class="submissionButton">
+            <button type="submit" class="btn btn-primary" onClick={submit}>Save</button>
+        </div>
     </div>
   );
 }

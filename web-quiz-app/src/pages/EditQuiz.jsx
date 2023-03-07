@@ -49,10 +49,10 @@ function EditQuiz(){
             newQuestion = <TextQuestion insID={userID} qID={quizID} load={false}></TextQuestion>;
         }
         if(question_type == 2){
-            newQuestion = <MultipleChoiceQuestion></MultipleChoiceQuestion>;
+            newQuestion = <MultipleChoiceQuestion insID={userID} qID={quizID} load={false}></MultipleChoiceQuestion>;
         }
         if(question_type == 3){
-            newQuestion = <MultipleSelectQuestion></MultipleSelectQuestion>;
+            newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={false}></MultipleSelectQuestion>;
         }
         if(question_type == 4){
             newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={false}></NumericalQuestion>;
