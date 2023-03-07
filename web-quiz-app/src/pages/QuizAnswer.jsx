@@ -66,11 +66,23 @@ class QuizAnswer extends React.Component {
                 )
             } else if (q.question_data == 2) {
                 return (
-                    <MultipleChoiceQuestionAnswer key={q.id} text={q.question_text} />
+                    <MultipleChoiceQuestionAnswer
+                        key={q.id} 
+                        questionId={q.id}
+                        value={this.state.value.get(q.id)}
+                        onInputChange={this.handleChange}
+                        text={q.question_text}  
+                    />
                 )
             } else if (q.question_data == 3) {
                 return (
-                    <MultipleSelectQuestionAnswer key={q.id} text={q.question_text} />
+                    <MultipleSelectQuestionAnswer 
+                        key={q.id} 
+                        questionId={q.id}
+                        value={this.state.value.get(q.id)}
+                        onInputChange={this.handleChange}
+                        text={q.question_text} 
+                    />
                 )
             } else {
                 return (
