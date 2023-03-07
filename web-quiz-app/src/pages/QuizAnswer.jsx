@@ -112,29 +112,30 @@ class QuizAnswer extends React.Component {
         const iterator1 = this.state.value.keys();
         for(let i = 0; i < this.state.value.size; i++){
             var k = iterator1.next().value;
-            // console.log(k, this.state.value.get(k));
             this.sendResponsesToDatabase(k, this.state.value.get(k));
         }
     }
 
     sendResponsesToDatabase(questionId, responseData) {
-            var studentResponse = {
-                attempt_number: 1,
-                response_data: responseData,
-                grade_achieved: 0,
-                student_id: this.getStudentId(),
-                question_id: questionId, 
-                quiz_id: this.getQuizId()
-            };
-            // console.log(studentResponse);
-
-            QuizDataService.createResponse(studentResponse)
-                .then(response => {
-                    console.log("Created response: " + studentResponse.response_data);
-                })
-                .catch(e => {
-                    console.log(e);
-                });
+        // In the case where a response is blank, do not send a request.
+        if(responseData===""){
+            return;
+        }
+        var studentResponse = {
+            attempt_number: 1,
+            response_data: responseData,
+            grade_achieved: 0,
+            student_id: this.getStudentId(),
+            question_id: questionId, 
+            quiz_id: this.getQuizId()
+        };
+        QuizDataService.createResponse(studentResponse)
+            .then(response => {
+                console.log("Created response: " + studentResponse.response_data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
 }
 
