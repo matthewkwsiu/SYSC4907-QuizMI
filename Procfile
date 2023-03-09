@@ -1,2 +1,2 @@
 release: python webquizappbackend/manage.py migrate
-web: gunicorn --chdir webquiteappbackend webquizappbackend.wsgi --log-file -
+web: gunicorn --pythonpath webquiteappbackend webquizappbackend.wsgi --log-file -
