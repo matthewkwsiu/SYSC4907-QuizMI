@@ -1,48 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import RadioInput from './RadioInput.jsx'
 
-class MultipleSelectQuestionAnswer extends React.Component {
+class MultipleChoiceQuestionAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             question: props.text.split("|||")[0],
-            selections: props.text.split("|||")[1].split(", ")
+            selections: props.text.split("|||")[1].split(", "),
         }
+        this.handleChange = this.handleChange.bind(this);
     }
-    componentDidMount() {
-        createSelectionElements(this.state.selections);
+
+    handleChange(event) {
+        this.props.onInputChange(this.props.questionId, event);
     }
+
     render() {
         return (
             <div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">{this.state.question}</label>
-                    <form id="multipleChoiceForm">
+                    <label htmlFor="formGroupExampleInput">{this.state.question}</label>
+                    <form id="multipleChoiceForm" >
+                        {this.createSelectionElements()}
                     </form>
                 </div>
             </div>
         );
     }
-}
 
-function createSelectionElements(selections) {
-
-    var select = document.getElementById("multipleChoiceForm");
-    var input;
-    var label;
-
-    for (var i = 0; i < selections.length; i++) {
-        input = document.createElement("input");
-        input.type = "radio";
-        input.name = "choice";
-        input.id = "choice" + selections[i] + i;
-        select.appendChild(input);
-        label = document.createElement("label");
-        label.innerHTML = selections[i];
-        label.htmlFor = "choice" + selections[i] + i;
-        select.appendChild(label);
-        select.appendChild(document.createElement("br"))
+    createSelectionElements() {
+        return this.state.selections.map((s) => {
+            return(
+                <RadioInput
+                    key={s} 
+                    questionId={this.props.questionId}
+                    selection={s}
+                    handleSelect={this.handleChange}
+                />
+            )
+        });
     }
 }
 
-export default MultipleSelectQuestionAnswer;
+export default MultipleChoiceQuestionAnswer;

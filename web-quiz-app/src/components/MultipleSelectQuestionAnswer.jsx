@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CheckboxInput from './CheckboxInput';
 
 class MultipleSelectQuestionAnswer extends React.Component {
 
@@ -7,41 +8,57 @@ class MultipleSelectQuestionAnswer extends React.Component {
         super(props);
         this.state = {
             question: props.text.split("|||")[0],
-            selections: props.text.split("|||")[1].split(", ")
+            selections: props.text.split("|||")[1].split(", "),
+            selectionMap: this.createSelectionMap()
         }
+        this.handleChange = this.handleChange.bind(this);
     }
-    componentDidMount() {
-        createSelectionElements(this.state.selections);
+
+    createSelectionMap() {
+        var selectionOptions = this.props.text.split("|||")[1].split(", ");
+        return new Map(selectionOptions.map((s) =>[s, false]));
     }
+
+    handleChange(value, checked) {
+        this.setState({selectionMap: this.state.selectionMap.set(value, checked)});
+        this.props.onInputChange(this.props.questionId, this.generateUpdate());
+    }
+
+    generateUpdate(){
+        var updateString = "";
+        this.state.selectionMap.forEach((value, key)=>{
+            if(value){
+                updateString = updateString.concat(key, ", ");
+            }
+        });
+        updateString = updateString.slice(0, -2);
+        return updateString;
+    }
+
     render() {
         return (
             <div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">{this.state.question}</label>
                     <form id="multipleSelectForm">
+                        {this.createSelectionElements()}
                     </form>
                 </div>
             </div>
         );
     }
-}
 
-function createSelectionElements(selections) {
-
-    var select = document.getElementById("multipleSelectForm");
-    var input;
-    var label;
-
-    for (var i = 0; i < selections.length; i++) {
-        input = document.createElement("input");
-        input.type = "checkbox";
-        input.id = "select" + selections[i] + i;
-        select.appendChild(input);
-        label = document.createElement("label");
-        label.innerHTML = selections[i];
-        label.htmlFor = "select" + selections[i] + i;
-        select.appendChild(label);
-        select.appendChild(document.createElement("br"))
+    createSelectionElements() {
+        return this.state.selections.map((s) => {
+            return(
+                <CheckboxInput
+                    key={s} 
+                    questionId={this.props.questionId}
+                    selection={s}
+                    handleSelect={this.handleChange}
+                />
+            )
+        });
     }
 }
 
