@@ -16,6 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Note, the guide for setting up heroku suggests the following:
+# BASE_DIR = Path(__file__).resolve().root.root
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -142,10 +144,20 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-```python
 # backend/settings.py
 
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
-```
+
+import django_heroku
+import dotenv
+import dj_database_url
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)
