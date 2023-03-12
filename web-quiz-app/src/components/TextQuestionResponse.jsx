@@ -6,7 +6,8 @@ class TextQuestionResponse extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            questionText: ""
+            questionText: "",
+            solutionText: ""
         }
     }
 
@@ -16,6 +17,7 @@ class TextQuestionResponse extends React.Component {
                 var text = response.data.question_text;
                 var editedText = text.split("|||");
                 this.setState({ questionText: editedText[0] });
+                this.setState({ solutionText: response.data.question_solution});
             })
             .catch(e => {
                 console.log(e);
@@ -29,6 +31,8 @@ class TextQuestionResponse extends React.Component {
                     <label for="">{this.state.questionText}</label>
                     <br></br>
                     <label for="">{this.getResponseData(this.props)}</label>
+                    <br></br>
+                    <label for="">{this.state.solutionText}</label>
                 </div>
             </div>
         );
