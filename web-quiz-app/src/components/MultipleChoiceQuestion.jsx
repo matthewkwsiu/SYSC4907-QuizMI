@@ -10,12 +10,35 @@ function MultipleChoiceQuestion(props) {
   const [userID, setUserID] = useState();
   const [quizID, setQuizID] = useState();
   const [totalMarks, setMarks] = useState();
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(1);
+  const [questionID, setQuestionID] = useState();
+  const [loadQuestion, setLoad] = useState(false);
 
   useEffect(() => {
     setUserID(props.insID)
     setQuizID(props.qID)
+    if(props.load) {
+        setQuestionID(props.questionID)
+        setQuestionName(props.question.split("|||")[0])
+        setMarks(props.marks)
+        setLoad(true)
+    }
 }, [])
+
+useEffect(() => {
+    if(loadQuestion) {
+        var fields = props.question.split("|||")[1].split(",")
+        var inputFieldForm = [];
+        for(let i = 0; i < fields.length;i++) {
+            inputFieldForm.push({option: fields[i]})
+            if(fields[i] == props.solution) {
+                setSolution(i)
+            }
+        }
+        setInputFields(inputFieldForm)
+        setCount(inputFieldForm.length)
+    }
+}, [loadQuestion])
   
   const addFields = () => {
 	  if(count < 7) {
@@ -48,6 +71,15 @@ function MultipleChoiceQuestion(props) {
     createQuestion()
 }
 
+function checkSolution(option) {
+    if(solution == option) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function createQuestion() {
     var choiceData = "";
     var solutionText = "";
@@ -57,6 +89,7 @@ function createQuestion() {
         }
         choiceData = choiceData + inputFields[i].option + ","
     }
+    choiceData = choiceData.slice(0,choiceData.length-1);
     var questionText = questionName + "|||" + choiceData
 
     var questionToCreate = {
@@ -64,23 +97,34 @@ function createQuestion() {
         question_text: questionText,
         question_total_marks: Number(totalMarks),
         quiz_id: quizID,
-        question_solution: solutionText,
+        question_solution: solutionText == "" ? solution : solutionText,
     };
 
     console.log(questionToCreate)
 
-    QuizDataService.createQuestion(questionToCreate)
+    if(loadQuestion) {
+        QuizDataService.updateQuestion(questionID, questionToCreate)
+        .then(response => {
+            console.log(questionToCreate);
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+    else {
+        QuizDataService.createQuestion(questionToCreate)
                 .then(response => {
                     console.log(questionToCreate);
                 })
                 .catch(e => {
                     console.log(e);
                 });
+    }
 }
 
   return (
     <div className="MultipleChoice">
-      <form>
+       <form>
         <div class="row">
           <div class="col">
             <label type="text">Question Title</label>
@@ -91,6 +135,7 @@ function createQuestion() {
             <div class="form-floating mb-3">
               <input
                 type="text"
+                value={questionName}
                 class="form-control"
                 id="floatingQuestion"
                 onChange={event => setQuestionName(event.target.value) }
@@ -131,6 +176,7 @@ function createQuestion() {
                     class="form-check-input"
 					name="radioButton"
                     type="radio"
+                    checked={checkSolution(index)}
                     onClick={() => setSolution(index) }
                   />
                 </div>
@@ -148,7 +194,10 @@ function createQuestion() {
       </form>
       <div class="form-group row">
             <div class="numberSlider">
-                <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" onChange={event => setMarks(event.target.value)}></input>
+                {loadQuestion ?
+                <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" value={totalMarks} onChange={event => setMarks(event.target.value)}></input>
+                : <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" onChange={event => setMarks(event.target.value)}></input>
+                }
             </div>
         </div>
       <div class="submission">

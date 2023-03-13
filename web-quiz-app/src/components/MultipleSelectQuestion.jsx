@@ -12,10 +12,18 @@ function MultipleSelectQuestion(props) {
   const [userID, setUserID] = useState();
   const [quizID, setQuizID] = useState();
   const [totalMarks, setMarks] = useState();
+  const [questionID, setQuestionID] = useState();
+  const [loadQuestion, setLoad] = useState(false);
 
   useEffect(() => {
     setUserID(props.insID)
     setQuizID(props.qID)
+    if(props.load) {
+        setQuestionID(props.questionID)
+        setQuestionName(props.question.split("|||")[0])
+        setMarks(props.marks)
+        setLoad(true)
+    }
 }, [])
 
   const addFields = () => {
@@ -45,6 +53,24 @@ function MultipleSelectQuestion(props) {
 	  setInputFields(data);
   }
 
+  useEffect(() => {
+    if(loadQuestion) {
+        var fields = props.question.split("|||")[1].split(",")
+        var solutionArray = props.solution.split(",")
+        var booleanArray = new Array(7).fill(false)
+        var inputFieldForm = [];
+        for(let i = 0; i < fields.length;i++) {
+            inputFieldForm.push({option: fields[i]})
+            if(fields[i] == solutionArray[i]) {
+                booleanArray[i] = true
+            }
+        }
+        setSolution(booleanArray)
+        setInputFields(inputFieldForm)
+        setCount(inputFieldForm.length)
+    }
+}, [loadQuestion])
+
   function submit() {
     createQuestion()
 }
@@ -58,6 +84,7 @@ function createQuestion() {
         }
         choiceData = choiceData + inputFields[i].option + ","
     }
+    choiceData = choiceData.slice(0,choiceData.length-1)
     var questionText = questionName + "|||" + choiceData
 
     var questionToCreate = {
@@ -68,13 +95,31 @@ function createQuestion() {
         question_solution: solutionText,
     };
 
-    QuizDataService.createQuestion(questionToCreate)
-                .then(response => {
-                    console.log(questionToCreate);
-                })
-                .catch(e => {
-                    console.log(e);
-                });
+    console.log(questionToCreate)
+
+
+    if(loadQuestion) {
+        QuizDataService.updateQuestion(questionID, questionToCreate)
+        .then(response => {
+            console.log(questionToCreate);
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+    else {
+        QuizDataService.createQuestion(questionToCreate)
+                    .then(response => {
+                        console.log(questionToCreate);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+    }
+}
+
+function checkSolution(option) {
+    return solution[option]
 }
 
 function detectCheckboxIndex(index) {
@@ -95,6 +140,7 @@ function detectCheckboxIndex(index) {
             <div class="form-floating mb-3">
               <input
                 type="text"
+                value={questionName}
                 class="form-control"
                 id="floatingQuestion"
                 onChange={event => setQuestionName(event.target.value) }
@@ -134,6 +180,7 @@ function detectCheckboxIndex(index) {
                   <input
                     class="custom-control-input"
                     type="checkbox"
+                    checked = {checkSolution(index)}
                     onClick={() => detectCheckboxIndex(index) }
                   />
                 </div>
@@ -151,7 +198,10 @@ function detectCheckboxIndex(index) {
       </form>
       <div class="form-group row">
             <div class="numberSlider">
-                <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" onChange={event => setMarks(event.target.value)}></input>
+                {loadQuestion ?
+                <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" value={totalMarks} onChange={event => setMarks(event.target.value)}></input>
+                : <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" onChange={event => setMarks(event.target.value)}></input>
+                }
             </div>
         </div>
       <div class="submission">
