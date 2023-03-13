@@ -17,5 +17,5 @@ from django.urls import re_path, include
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    re_path(r'^https://sysc4907-quizmi.herokuapp.com/', include('quizzes.urls')),
+    re_path(r'^$', include('quizzes.urls')),
 ]
