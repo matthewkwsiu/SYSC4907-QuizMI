@@ -73,8 +73,10 @@ function EditQuiz(){
                             newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></TextQuestion>;
                             break;
                         case 2:
+                            newQuestion = <MultipleChoiceQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></MultipleChoiceQuestion>;
                             break;
                         case 3:
+                            newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></MultipleSelectQuestion>;
                             break;
                         case 4:
                             newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></NumericalQuestion>;
