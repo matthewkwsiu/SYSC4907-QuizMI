@@ -117,7 +117,7 @@ function EditQuiz(){
                     </div>
                     
                     <div>
-                        <input type="text" value="1234567" id="QuizIdLabel" readOnly/>
+                        <input type="text" value={quizID} id="QuizIdLabel" readOnly/>
                         <button onClick={copyQuizId}>copy</button>
                     </div>
                 </div>
@@ -146,7 +146,7 @@ function EditQuiz(){
                             </div>
                         </Tab>
                         <Tab eventKey="responses" title="Responses">
-                            <QuizResponses quiz_id={1}/>
+                            <QuizResponses quiz_id={quizID}/>
                         </Tab>
                     </Tabs>
                 </div>
