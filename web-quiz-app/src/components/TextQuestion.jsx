@@ -84,7 +84,7 @@ function TextQuestion(props) {
     function createQuestion() {
         console.log(quizID)
         var questionToCreate = {
-            question_data: 1,
+            question_data: 0,
             question_text: question,
             question_total_marks: Number(totalMarks),
             quiz_id: quizID,
