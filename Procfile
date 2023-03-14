@@ -1,3 +1,3 @@
 release: python webquizappbackend/manage.py migrate
-web: node App.js
+web: npm start
 web: gunicorn --chdir webquizappbackend webquizappbackend.wsgi
