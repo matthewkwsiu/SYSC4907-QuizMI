@@ -16,6 +16,9 @@ class QuizDataService {
 	createQuestion(question) {
 		return http.post("/questions", question);
 	}
+    updateQuestion(questionID, question) {
+        return http.put("/questions/" + questionID, question)
+    }
     getQuestion(questionID) {
         return http.get("/questions/" + questionID);
     }

@@ -29,6 +29,7 @@ class Question(models.Model):
     )
     question_data = models.IntegerField(default=0)
     question_text = models.CharField(max_length=200)
+    question_solution = models.CharField(max_length=200)
     question_total_marks = models.IntegerField(default=1)
 
 class Response(models.Model):

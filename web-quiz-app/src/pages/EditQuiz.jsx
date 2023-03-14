@@ -7,28 +7,98 @@ import TextQuestion from "../components/TextQuestion";
 import MultipleSelectQuestion from "../components/MultipleSelectQuestion";
 import NumericalQuestion from "../components/NumericalQuestion";
 import MultipleChoiceQuestion from "../components/MultipleChoiceQuestion";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import QuizResponses from "./QuizResponses";
+import QuizDataService from "../services/quiz.service";
 
 function EditQuiz(){
 	const [quizName, setQuizName] = useState(JSON.parse(localStorage.getItem('lastSelectedQuiz')))
     const [questions, setQuestions] = useState([])
+    const [userID, setUserID] = useState();
+    const [quizID, setQuizID] = useState();
+
+    useEffect(() => {
+        QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
+                .then(response => {
+                    setUserID(response.data);
+                })
+                .catch(e => {
+                    console.log(e)
+                });
+    }, [])
+
+    useEffect(() => {
+        if(userID) {
+            QuizDataService.crossCheckQuizID(JSON.parse(localStorage.getItem('lastSelectedQuiz')), userID)
+            .then(response => {
+                setQuizID(response.data)
+            })
+            .catch(e =>{
+                console.log(e)
+            })
+        }
+    }, [userID])
+
+    useEffect(() => {
+        loadAllQuestions()
+    }, [quizID])
+
     const addQuestion = (question_type) => {
         var newQuestion;
         if(question_type == 1){
-            newQuestion = <TextQuestion></TextQuestion>;
+            newQuestion = <TextQuestion insID={userID} qID={quizID} load={false}></TextQuestion>;
         }
         if(question_type == 2){
-            newQuestion = <MultipleChoiceQuestion></MultipleChoiceQuestion>;
+            newQuestion = <MultipleChoiceQuestion insID={userID} qID={quizID} load={false}></MultipleChoiceQuestion>;
         }
         if(question_type == 3){
-            newQuestion = <MultipleSelectQuestion></MultipleSelectQuestion>;
+            newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={false}></MultipleSelectQuestion>;
         }
         if(question_type == 4){
-            newQuestion = <NumericalQuestion></NumericalQuestion>;
+            newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={false}></NumericalQuestion>;
         }
         setQuestions([...questions, newQuestion])
     };
+
+    function loadAllQuestions() {
+        if(quizID) {
+            QuizDataService.getQuizQuestions(quizID)
+            .then(response => {
+                var questionsToBeAdded = []
+                response.data.forEach(function (e) {
+                    var newQuestion;
+                    console.log(e.question_data)
+                    switch(e.question_data) {
+                        case 1:
+                            newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></TextQuestion>;
+                            break;
+                        case 2:
+                            newQuestion = <MultipleChoiceQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></MultipleChoiceQuestion>;
+                            break;
+                        case 3:
+                            newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></MultipleSelectQuestion>;
+                            break;
+                        case 4:
+                            newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></NumericalQuestion>;
+                            break;
+                    }
+                    questionsToBeAdded.push(newQuestion)
+                })
+                setQuestions([...questions, questionsToBeAdded])
+            })
+            .catch(e => {
+                console.log(e)
+            })
+        }
+    }
+    
+    function copyQuizId(){
+        var copyText = document.getElementById("QuizIdLabel");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        alert("Copied the text: " + copyText.value);
+    }
 
     return(
         <div>
@@ -83,14 +153,6 @@ function EditQuiz(){
             </div>
         </div>
     );
-}
-
-function copyQuizId(){
-    var copyText = document.getElementById("QuizIdLabel");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyText.value);
-    alert("Copied the text: " + copyText.value);
 }
 
 export default EditQuiz;

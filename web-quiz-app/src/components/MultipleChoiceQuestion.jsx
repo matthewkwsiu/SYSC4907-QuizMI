@@ -1,10 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import QuizDataService from "../services/quiz.service";
 
-function MultipleChoiceQuestion() {
+function MultipleChoiceQuestion(props) {
   const [inputFields, setInputFields] = useState([
     { option: ""},
   ]);
-  const [count, setCount] = useState(1)
+  const [questionName, setQuestionName] = useState();
+  const [solution, setSolution] = useState();
+  const [userID, setUserID] = useState();
+  const [quizID, setQuizID] = useState();
+  const [totalMarks, setMarks] = useState();
+  const [count, setCount] = useState(1);
+  const [questionID, setQuestionID] = useState();
+  const [loadQuestion, setLoad] = useState(false);
+
+  useEffect(() => {
+    setUserID(props.insID)
+    setQuizID(props.qID)
+    if(props.load) {
+        setQuestionID(props.questionID)
+        setQuestionName(props.question.split("|||")[0])
+        setMarks(props.marks)
+        setLoad(true)
+    }
+}, [])
+
+useEffect(() => {
+    if(loadQuestion) {
+        var fields = props.question.split("|||")[1].split(",")
+        var inputFieldForm = [];
+        for(let i = 0; i < fields.length;i++) {
+            inputFieldForm.push({option: fields[i]})
+            if(fields[i] == props.solution) {
+                setSolution(i)
+            }
+        }
+        setInputFields(inputFieldForm)
+        setCount(inputFieldForm.length)
+    }
+}, [loadQuestion])
+  
   const addFields = () => {
 	  if(count < 7) {
 		let newfield = { option: ""};
@@ -31,9 +66,65 @@ function MultipleChoiceQuestion() {
 	  data[index][event.target.name]=event.target.value;
 	  setInputFields(data);
   }
+
+  function submit() {
+    createQuestion()
+}
+
+function checkSolution(option) {
+    if(solution == option) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function createQuestion() {
+    var choiceData = "";
+    var solutionText = "";
+    for(let i = 0; i < inputFields.length; i++) {
+        if(solution == i) {
+            solutionText = inputFields[i].option
+        }
+        choiceData = choiceData + inputFields[i].option + ","
+    }
+    choiceData = choiceData.slice(0,choiceData.length-1);
+    var questionText = questionName + "|||" + choiceData
+
+    var questionToCreate = {
+        question_data: 2,
+        question_text: questionText,
+        question_total_marks: Number(totalMarks),
+        quiz_id: quizID,
+        question_solution: solutionText == "" ? solution : solutionText,
+    };
+
+    console.log(questionToCreate)
+
+    if(loadQuestion) {
+        QuizDataService.updateQuestion(questionID, questionToCreate)
+        .then(response => {
+            console.log(questionToCreate);
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    }
+    else {
+        QuizDataService.createQuestion(questionToCreate)
+                .then(response => {
+                    console.log(questionToCreate);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+    }
+}
+
   return (
     <div className="MultipleChoice">
-      <form>
+       <form>
         <div class="row">
           <div class="col">
             <label type="text">Question Title</label>
@@ -44,8 +135,10 @@ function MultipleChoiceQuestion() {
             <div class="form-floating mb-3">
               <input
                 type="text"
+                value={questionName}
                 class="form-control"
                 id="floatingQuestion"
+                onChange={event => setQuestionName(event.target.value) }
               ></input>
               <label for="floatingQuestion">Question</label>
             </div>
@@ -83,6 +176,8 @@ function MultipleChoiceQuestion() {
                     class="form-check-input"
 					name="radioButton"
                     type="radio"
+                    checked={checkSolution(index)}
+                    onClick={() => setSolution(index) }
                   />
                 </div>
                 <div class="col">
@@ -97,11 +192,22 @@ function MultipleChoiceQuestion() {
           );
         })}
       </form>
+      <div class="form-group row">
+            <div class="numberSlider">
+                {loadQuestion ?
+                <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" value={totalMarks} onChange={event => setMarks(event.target.value)}></input>
+                : <input type="number" class="form-control" id="totalMark" placeholder="Enter Total Marks" onChange={event => setMarks(event.target.value)}></input>
+                }
+            </div>
+        </div>
       <div class="submission">
         <button type="submit" class="btn btn-primary" onClick={addFields}>
           Add More..
         </button>
       </div>
+      <div class="submissionButton">
+            <button type="submit" class="btn btn-primary" onClick={submit}>Save</button>
+        </div>
     </div>
   );
 }
