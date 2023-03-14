@@ -28,11 +28,11 @@ class TextQuestionResponse extends React.Component {
         return (
             <div>
                 <div class="form-group">
-                    <label for="">{this.state.questionText}</label>
+                    <label for="">Question: {this.state.questionText}</label>
                     <br></br>
-                    <label for="">{this.getResponseData(this.props)}</label>
+                    <label for="">Your Response: {this.getResponseData(this.props)}</label>
                     <br></br>
-                    <label for="">{this.state.solutionText}</label>
+                    <label for="">Solution: {this.state.solutionText}</label>
                 </div>
             </div>
         );
