@@ -78,7 +78,7 @@ function EditQuiz(){
                     var newQuestion;
                     console.log(e.question_data)
                     switch(e.question_data) {
-                        case 1:
+                        case 0:
                             newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></TextQuestion>;
                             break;
                         case 2:
@@ -87,7 +87,7 @@ function EditQuiz(){
                         case 3:
                             newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></MultipleSelectQuestion>;
                             break;
-                        case 4:
+                        case 1:
                             newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></NumericalQuestion>;
                             break;
                     }
