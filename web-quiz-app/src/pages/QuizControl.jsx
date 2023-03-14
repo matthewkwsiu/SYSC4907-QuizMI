@@ -28,7 +28,7 @@ function QuizControl() {
         if(quizzes) {
             quizzes.forEach(function (e) {
                 var btn = document.createElement("button");
-                var t = document.createTextNode("Quiz: " + e.quiz_name + "Course: " + e.course_name);
+                var t = document.createTextNode("Quiz: " + e.quiz_name + " Course: " + e.course_name);
                 btn.onclick = function () {
                     localStorage.setItem('lastSelectedQuiz', JSON.stringify(e.quiz_name));
                     window.location.href = '/editQuiz'
