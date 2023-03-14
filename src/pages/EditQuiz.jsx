@@ -54,7 +54,7 @@ function EditQuiz(){
 
     const addQuestion = (question_type) => {
         var newQuestion;
-        if(question_type == 1){
+        if(question_type == 0){
             newQuestion = <TextQuestion insID={userID} qID={quizID} load={false}></TextQuestion>;
         }
         if(question_type == 2){
@@ -63,7 +63,7 @@ function EditQuiz(){
         if(question_type == 3){
             newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={false}></MultipleSelectQuestion>;
         }
-        if(question_type == 4){
+        if(question_type == 1){
             newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={false}></NumericalQuestion>;
         }
         setQuestions([...questions, newQuestion])
