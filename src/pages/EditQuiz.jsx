@@ -157,10 +157,10 @@ function EditQuiz(){
                                     Add New Question
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu id="question_dropdown">
-                                    <Dropdown.Item onClick={e => {addQuestion(1);}}>Text</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => {addQuestion(0);}}>Text</Dropdown.Item>
                                     <Dropdown.Item onClick={e => {addQuestion(2);}}>Multiple Choice</Dropdown.Item>
                                     <Dropdown.Item onClick={e => {addQuestion(3);}}>Multiple Select</Dropdown.Item>
-                                    <Dropdown.Item onClick={e => {addQuestion(4);}}>Numerical</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => {addQuestion(1);}}>Numerical</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             </div>
