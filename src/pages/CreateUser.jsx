@@ -66,8 +66,8 @@ class CreateUser extends React.Component {
             QuizDataService.createStudent(student)
                 .then(response => {
                     this.setState({ login: true }, () => {
-                        console.log("redirecting")
-                        window.location.href = '/quizControl';
+                        // console.log("redirecting")
+                        // window.location.href = '/quizControl';
                         console.log(this.state.login);
                     }); 
                     console.log("Created student" + student.student_name);
