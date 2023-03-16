@@ -27,7 +27,7 @@ function MultipleChoiceQuestion(props) {
 
 useEffect(() => {
     if(loadQuestion) {
-        var fields = props.question.split("|||")[1].split(", ")
+        var fields = props.question.split("|||")[1].split("~")
         var inputFieldForm = [];
         for(let i = 0; i < fields.length;i++) {
             inputFieldForm.push({option: fields[i]})
@@ -87,9 +87,9 @@ function createQuestion() {
         if(solution == i) {
             solutionText = inputFields[i].option
         }
-        choiceData = choiceData + inputFields[i].option + ", "
+        choiceData = choiceData + inputFields[i].option + "~"
     }
-    choiceData = choiceData.slice(0,choiceData.length-2);
+    choiceData = choiceData.slice(0,choiceData.length-1);
     var questionText = questionName + "|||" + choiceData
 
     var questionToCreate = {
