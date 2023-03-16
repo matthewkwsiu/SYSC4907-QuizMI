@@ -84,7 +84,7 @@ function createQuestion() {
         }
         choiceData = choiceData + inputFields[i].option + ", "
     }
-    choiceData = choiceData.slice(0,choiceData.length-2)
+    choiceData = choiceData.slice(0,choiceData.length-1)
     var questionText = questionName + "|||" + choiceData
 
     var questionToCreate = {
