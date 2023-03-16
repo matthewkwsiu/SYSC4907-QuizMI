@@ -8,14 +8,14 @@ class MultipleSelectQuestionAnswer extends React.Component {
         super(props);
         this.state = {
             question: props.text.split("|||")[0],
-            selections: props.text.split("|||")[1].split(", "),
+            selections: props.text.split("|||")[1].split("~"),
             selectionMap: this.createSelectionMap()
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
     createSelectionMap() {
-        var selectionOptions = this.props.text.split("|||")[1].split(", ");
+        var selectionOptions = this.props.text.split("|||")[1].split("~");
         return new Map(selectionOptions.map((s) =>[s, false]));
     }
 
@@ -28,10 +28,10 @@ class MultipleSelectQuestionAnswer extends React.Component {
         var updateString = "";
         this.state.selectionMap.forEach((value, key)=>{
             if(value){
-                updateString = updateString.concat(key, ", ");
+                updateString = updateString.concat(key, "~");
             }
         });
-        updateString = updateString.slice(0, -2);
+        updateString = updateString.slice(0, -1);
         return updateString;
     }
 
