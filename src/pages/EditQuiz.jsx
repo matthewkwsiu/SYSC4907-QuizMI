@@ -16,6 +16,7 @@ function EditQuiz(){
     const [questions, setQuestions] = useState([])
     const [userID, setUserID] = useState();
     const [quizID, setQuizID] = useState();
+    const [responses, setResponses] = useState();
 
     useEffect(() => {
         QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
@@ -41,6 +42,10 @@ function EditQuiz(){
 
     useEffect(() => {
         loadAllQuestions()
+    }, [quizID])
+
+    useEffect(() => {
+        initializeResponses()
     }, [quizID])
 
     const addQuestion = (question_type) => {
@@ -100,6 +105,12 @@ function EditQuiz(){
         alert("Copied the text: " + copyText.value);
     }
 
+    function initializeResponses(){
+        if(quizID){
+            setResponses(<QuizResponses quiz_id={quizID}/>);
+        }
+    }
+
     return(
         <div>
             <HeaderInstructor></HeaderInstructor>
@@ -146,7 +157,7 @@ function EditQuiz(){
                             </div>
                         </Tab>
                         <Tab eventKey="responses" title="Responses">
-                            <QuizResponses quiz_id={quizID}/>
+                            {responses}
                         </Tab>
                     </Tabs>
                 </div>
