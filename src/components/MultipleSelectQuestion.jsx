@@ -56,7 +56,7 @@ function MultipleSelectQuestion(props) {
   useEffect(() => {
     if(loadQuestion) {
         var fields = props.question.split("|||")[1].split(",")
-        var solutionArray = props.solution.split(", ")
+        var solutionArray = props.solution.split(",")
         var booleanArray = new Array(7).fill(false)
         var inputFieldForm = [];
         for(let i = 0; i < fields.length;i++) {
