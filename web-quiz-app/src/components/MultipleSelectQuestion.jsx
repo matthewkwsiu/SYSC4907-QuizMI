@@ -61,8 +61,10 @@ function MultipleSelectQuestion(props) {
         var inputFieldForm = [];
         for(let i = 0; i < fields.length;i++) {
             inputFieldForm.push({option: fields[i]})
-            if(fields[i] == solutionArray[i]) {
-                booleanArray[i] = true
+            for(let j = 0; j < solutionArray.length; j++) {
+                if(fields[i] == solutionArray[j]) {
+                    booleanArray[i] = true
+                }
             }
         }
         setSolution(booleanArray)

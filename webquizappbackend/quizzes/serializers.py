@@ -15,7 +15,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        fields = ('id','student_name','student_username','student_username')
+        fields = ('id','student_name','student_username','student_password')
 
 class QuizSerializer(serializers.ModelSerializer):
     instructor_id = serializers.IntegerField(style={'intput_type':'hidden'})
