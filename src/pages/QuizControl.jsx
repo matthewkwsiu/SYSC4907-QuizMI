@@ -79,7 +79,7 @@ function QuizControl() {
         });
 
     var btn = document.createElement("button");
-    var t = document.createTextNode("Quiz: " + quiz.quiz_name + "Course: " + quiz.course_name);
+    var t = document.createTextNode("Quiz: " + quiz.quiz_name + " Course: " + quiz.course_name);
     btn.onclick = function () {
 		localStorage.setItem('lastSelectedQuiz', JSON.stringify(quiz.quiz_name));
         window.location.href = '/editQuiz';
