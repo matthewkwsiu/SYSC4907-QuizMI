@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 function HeaderStudent() {
   return (
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <Navbar bg="light" expand="lg">
     <a class="navbar-brand" href="#">
       Navbar
     </a>
@@ -43,7 +43,7 @@ function HeaderStudent() {
         <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  </nav>
+    </Navbar>
   );
 }
 

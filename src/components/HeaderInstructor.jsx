@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 function HeaderInstructor() {
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <Navbar bg="light" expand="lg">
             <a class="navbar-brand" href="#">QuizMI</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" />
@@ -29,7 +29,7 @@ function HeaderInstructor() {
                     <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-        </nav>
+        </Navbar>
     );
 }
 export default HeaderInstructor;
