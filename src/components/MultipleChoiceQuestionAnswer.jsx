@@ -7,7 +7,7 @@ class MultipleChoiceQuestionAnswer extends React.Component {
         super(props);
         this.state = {
             question: props.text.split("|||")[0],
-            selections: props.text.split("|||")[1].split("~"),
+            selections: props.text.split("|||")[1].split(","),
         }
         this.handleChange = this.handleChange.bind(this);
     }
