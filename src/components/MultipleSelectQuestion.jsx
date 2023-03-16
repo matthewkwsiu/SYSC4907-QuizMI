@@ -86,6 +86,8 @@ function MultipleSelectQuestion(props) {
     function submit() {
         createQuestion()
     }
+    choiceData = choiceData.slice(0,choiceData.length-1)
+    var questionText = questionName + "|||" + choiceData
 
     function createQuestion() {
         var choiceData = "";
