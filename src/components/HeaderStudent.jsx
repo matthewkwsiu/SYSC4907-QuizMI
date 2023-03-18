@@ -6,9 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 function HeaderStudent() {
   return (
     <Navbar bg="light">
-    <a class="navbar-brand" href="#">
-      Navbar
-    </a>
+    <a class="navbar-brand" href="#">QuizMI</a>
     <button
       class="navbar-toggler"
       type="button"
