@@ -16,6 +16,7 @@ function EditQuiz(){
     const [questions, setQuestions] = useState([])
     const [userID, setUserID] = useState();
     const [quizID, setQuizID] = useState();
+    const [activeSwitch, setActiveSwitch] = useState();
 
     useEffect(() => {
         QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
@@ -40,6 +41,12 @@ function EditQuiz(){
     }, [userID])
 
     useEffect(() => {
+        QuizDataService.getQuiz(quizID)
+        .then(response => {
+            setActiveSwitch(response.data)
+        }).catch(e => {
+            console.log(e)
+        })
         loadAllQuestions()
     }, [quizID])
 
@@ -91,6 +98,19 @@ function EditQuiz(){
             })
         }
     }
+
+    function handleActiveSwitch() {
+        setActiveSwitch(!activeSwitch)
+
+        if(quizID) {
+            QuizDataService.changeQuizActivity(quizID)
+            .then(response => {
+
+            }).catch(e => {
+                console.log(e)
+            })
+        }
+    }
     
     function copyQuizId(){
         var copyText = document.getElementById("QuizIdLabel");
@@ -110,7 +130,7 @@ function EditQuiz(){
                     <div>
                         <a>Inactive </a>
                         <label class="switch">
-                            <input type="checkbox"/>
+                            <input checked={activeSwitch == 1 ? true : false} type="checkbox" onClick={handleActiveSwitch}/>
                             <span class="slider"></span>
                         </label>
                         <a> Active</a>
