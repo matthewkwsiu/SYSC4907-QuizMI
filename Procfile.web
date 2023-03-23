@@ -1,2 +1,2 @@
-node: npm start
+web: npm start
 django: gunicorn --chdir webquizappbackend webquizappbackend.wsgi
