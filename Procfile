@@ -1,3 +1,3 @@
 release: python webquizappbackend/manage.py migrate
-web: bin/runsvdir-dyno
-
+web: npm start
+web: gunicorn --chdir webquizappbackend webquizappbackend.wsgi
