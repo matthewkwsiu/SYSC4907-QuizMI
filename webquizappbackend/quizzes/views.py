@@ -109,7 +109,7 @@ def student_detail(request, pk):
 @api_view(['GET'])
 def username_getStudentFromUsername(request, username):
     try:
-        student = Student.objects.get(student_name=username)
+        student = Student.objects.get(student_username=username)
     except Student.DoesNotExist:
         return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
