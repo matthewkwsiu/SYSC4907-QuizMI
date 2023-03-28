@@ -24,12 +24,15 @@ function HeaderInstructor() {
                     Profile
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/#">My Profile</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Switch Account</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+                    <Dropdown.Item href="#/action-1" onClick={logoutUser}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </nav>
     );
+
+    function logoutUser() {
+        localStorage.clear();
+        window.location.href = '/';
+    }
 }
 export default HeaderInstructor;
