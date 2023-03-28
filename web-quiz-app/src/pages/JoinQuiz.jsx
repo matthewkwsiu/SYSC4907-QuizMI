@@ -13,7 +13,7 @@ function JoinQuiz() {
             window.location.href = '/quizAnswer/' + document.getElementById("quizID").value;
         }
         else {
-            alert("This quiz doesn't exost, or is inaccessible")    
+            alert("This quiz doesn't exist, or is inaccessible")    
         }
     }, [nextPage])
 
