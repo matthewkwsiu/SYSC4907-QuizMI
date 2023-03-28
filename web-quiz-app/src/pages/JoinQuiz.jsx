@@ -12,7 +12,7 @@ function JoinQuiz() {
         if(nextPage) {
             window.location.href = '/quizAnswer/' + document.getElementById("quizID").value;
         }
-        else {
+        else if (!nextPage) {
             alert("This quiz doesn't exist, or is inaccessible")    
         }
     }, [nextPage])
