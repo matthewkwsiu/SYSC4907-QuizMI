@@ -35,7 +35,7 @@ function JoinQuiz() {
                 setNextPage(true)
             }
             else {
-                alert("This quiz doesn't exost, or is inaccessible")
+                alert("This quiz doesn't exist, or is inaccessible")
             }
         }).catch(e => {
     
