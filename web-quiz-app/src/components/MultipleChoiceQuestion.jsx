@@ -26,6 +26,16 @@ function MultipleChoiceQuestion(props) {
 }, [])
 
 useEffect(() => {
+    if(totalMarks != null) {
+        if(totalMarks < 0 || isNaN(totalMarks)) {
+            document.getElementById("totalMark").value = 0
+            setMarks(0)
+            alert("Total marks must be a positive integer")
+        }
+    }
+}, [totalMarks])
+
+useEffect(() => {
     if(loadQuestion) {
         var fields = props.question.split("|||")[1].split(",")
         var inputFieldForm = [];

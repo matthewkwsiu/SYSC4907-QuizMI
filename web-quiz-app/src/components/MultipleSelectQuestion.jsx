@@ -26,6 +26,16 @@ function MultipleSelectQuestion(props) {
     }
 }, [])
 
+useEffect(() => {
+    if(totalMarks != null) {
+        if(totalMarks < 0 || isNaN(totalMarks)) {
+            document.getElementById("totalMark").value = 0
+            setMarks(0)
+            alert("Total marks must be a positive integer")
+        }
+    }
+}, [totalMarks])
+
   const addFields = () => {
 	  if(count < 7) {
 		let newfield = { option: ""};
