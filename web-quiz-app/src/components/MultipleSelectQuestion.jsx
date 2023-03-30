@@ -102,6 +102,7 @@ function createQuestion() {
         QuizDataService.updateQuestion(questionID, questionToCreate)
         .then(response => {
             console.log(questionToCreate);
+            alert("Question has been updated");
         })
         .catch(e => {
             console.log(e);
@@ -111,6 +112,7 @@ function createQuestion() {
         QuizDataService.createQuestion(questionToCreate)
                     .then(response => {
                         console.log(questionToCreate);
+                        alert("Question has been created");
                     })
                     .catch(e => {
                         console.log(e);
