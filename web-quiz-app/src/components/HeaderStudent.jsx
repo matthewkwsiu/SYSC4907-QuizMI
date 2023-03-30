@@ -47,7 +47,7 @@ function HeaderStudent() {
   function logoutUser() {
     localStorage.clear();
     window.location.href = '/';
-}
+  }
 }
 
 export default HeaderStudent;
