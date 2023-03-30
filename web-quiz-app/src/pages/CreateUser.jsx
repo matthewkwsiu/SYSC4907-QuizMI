@@ -8,7 +8,6 @@ class CreateUser extends React.Component {
             login: false,
             name: "",
             username: "",
-            password: "",
             isInstructor: true
         }
     }
@@ -27,25 +26,18 @@ class CreateUser extends React.Component {
         console.log(this.state.username);
     }
 
-    passwordUpdate = (currentPassword) => {
-        this.setState({
-            password: currentPassword
-        });
-        console.log(this.state.password);
-    }
-
     isInstructorUpdate = (isInstr) => {
         this.setState({
             isInstructor: isInstr
         });
     }
 
-    createUser(name, username, password) {
+    createUser(name, username) {
         if (this.state.isInstructor) {
             var instructor = {
                 instructor_name: name,
                 instructor_username: username,
-                instructor_password: password
+                instructor_password: "password_placeholder"
             };
 			localStorage.setItem("user", JSON.stringify(instructor.instructor_username))
             console.log(instructor.instructor_name)
@@ -67,7 +59,7 @@ class CreateUser extends React.Component {
             var student = {
                 student_name: name,
                 student_username: username,
-                student_password: password
+                student_password: "password_placeholder"
             };
 			localStorage.setItem("user", JSON.stringify(student.student_username))
             console.log(student.student_name)
@@ -112,10 +104,6 @@ class CreateUser extends React.Component {
                     <input type="text" class="form-control" id="username" placeholder="Enter Username" onChange={(e) => this.usernameUpdate(e.target.value)}/>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter Password" onChange={(e) => this.passwordUpdate(e.target.value)}/>
-                </div>
-                <div class="form-group">
                     <label>User Type</label><br></br>
                     <label for="Instructor">
                         <input type="radio"
@@ -135,7 +123,7 @@ class CreateUser extends React.Component {
                         Student
                     </label><br></br>
                 </div>
-                <button class="btn btn-primary" onClick={this.createUser.bind(this, this.state.name, this.state.username, this.state.password, this.state.isInstructor)}>Submit</button>
+                <button class="btn btn-primary" onClick={this.createUser.bind(this, this.state.name, this.state.username, this.state.isInstructor)}>Submit</button>
             </div>
         );
     }
