@@ -27,7 +27,16 @@ class LoginPage extends React.Component {
             };
 			localStorage.setItem("user", JSON.stringify(instructor.instructor_name))
             console.log(instructor.instructor_name)
-            window.location.href = '/quizControl';
+            QuizDataService.getInstructorID(instructor.instructor_name)
+            .then(response => {
+                console.log("Logged in with instructor " + response.data);
+                window.location.href = '/quizControl';
+            })
+            .catch(e => {
+                console.log(e);
+                alert("Username is invalid");
+            });
+            
         } else {
             var student = {
                 student_name: name
@@ -36,13 +45,14 @@ class LoginPage extends React.Component {
             console.log(student.student_name)
             QuizDataService.getStudentFromUsername(student.student_name)
                 .then(response => {
-                    console.log("Created student" + response.data.id);
+                    console.log("Logged in with student " + response.data.id);
                     localStorage.setItem("studentID", JSON.stringify(response.data.id))
                     console.log("redirecting");
                     window.location.href = '/joinQuiz';
                 })
                 .catch(e => {
                     console.log(e);
+                    alert("Username is invalid");
                 });
         }
     }
