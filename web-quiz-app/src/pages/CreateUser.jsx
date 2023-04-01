@@ -37,7 +37,11 @@ class CreateUser extends React.Component {
             var instructor = {
                 instructor_name: name,
                 instructor_username: username,
+<<<<<<< HEAD
                 instructor_password: "placeholder_password"
+=======
+                instructor_password: "password_placeholder"
+>>>>>>> Removed password field
             };
 			localStorage.setItem("user", JSON.stringify(instructor.instructor_username))
             console.log(instructor.instructor_name)
@@ -59,7 +63,11 @@ class CreateUser extends React.Component {
             var student = {
                 student_name: name,
                 student_username: username,
+<<<<<<< HEAD
                 student_password: "placeholder_password"
+=======
+                student_password: "password_placeholder"
+>>>>>>> Removed password field
             };
 			localStorage.setItem("user", JSON.stringify(student.student_username))
             console.log(student.student_name)
