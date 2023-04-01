@@ -71,7 +71,7 @@ class CreateUser extends React.Component {
                         console.log(this.state.login);
                     }); 
                     console.log("Created student" + student.student_name);
-                    QuizDataService.getStudentFromUsername(student.student_name)
+                    QuizDataService.getStudentFromUsername(student.student_username)
                         .then(response => {
                             console.log("Created student" + response.data.id);
                             localStorage.setItem("studentID", JSON.stringify(response.data.id))
