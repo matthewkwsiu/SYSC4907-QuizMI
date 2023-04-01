@@ -79,6 +79,7 @@ function MultipleSelectQuestion(props) {
             setSolution(booleanArray)
             setInputFields(inputFieldForm)
             setCount(inputFieldForm.length)
+            }
         }
     }, [loadQuestion])
 
