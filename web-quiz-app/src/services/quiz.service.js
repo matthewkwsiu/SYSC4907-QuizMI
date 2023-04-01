@@ -52,6 +52,12 @@ class QuizDataService {
     createResponse(response){
         return http.post("/responses", response);
     }
+    changeQuizActivity(quizID) {
+        return http.put("quizzes/active/" + quizID)
+    }
+    getQuiz(quizID) {
+        return http.get("quizzes/active/" + quizID)
+    }
 }
 
 export default new QuizDataService();

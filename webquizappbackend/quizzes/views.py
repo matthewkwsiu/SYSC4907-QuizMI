@@ -142,7 +142,7 @@ def quiz_list(request):
         return JsonResponse({'message': '{} Quizzes were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def quiz_detail(request, pk):
+def quiz_active(request, pk):
     try:
         quiz = Quiz.objects.get(pk=pk)
     except Quiz.DoesNotExist:
@@ -150,19 +150,12 @@ def quiz_detail(request, pk):
 
     if request.method == 'GET':
         quiz_serializer = QuizSerializer(quiz)
-        return JsonResponse(quiz_serializer.data)
+        return JsonResponse(quiz_serializer.data['active_status'], safe=False)
     
     elif request.method == 'PUT':
-        quiz_data = JSONParser().parse(request)
-        quiz_serializer = QuizSerializer(quiz, data=quiz_data)
-        if quiz_serializer.is_valid():
-            quiz_serializer.save()
-            return JsonResponse(quiz_serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(quiz_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        quiz.delete()
-        return JsonResponse({'message': 'Quiz was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        quiz.active_status = not quiz.active_status
+        quiz.save(update_fields=["active_status"])
+        return JsonResponse(data=quiz.active_status, status=status.HTTP_201_CREATED, safe=False)
 
 @api_view(['GET', 'DELETE'])
 def quiz_list_owned_by_instructor(request, instructorId):

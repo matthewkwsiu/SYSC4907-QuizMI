@@ -7,6 +7,7 @@ import MultipleSelectQuestionAnswer from "../components/MultipleSelectQuestionAn
 import NumericalQuestionAnswer from "../components/NumericalQuestionAnswer";
 import MultipleChoiceQuestionAnswer from "../components/MultipleChoiceQuestionAnswer";
 import Button from 'react-bootstrap/Button';
+import ErrorPage from "../error-page";
 
 class QuizAnswer extends React.Component {
 
@@ -14,7 +15,8 @@ class QuizAnswer extends React.Component {
         super(props);
         this.state = {
             questions: [],
-            value: new Map()
+            value: new Map(),
+            accessible: false
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -34,17 +36,36 @@ class QuizAnswer extends React.Component {
             .catch(e => {
                 console.log(e);
             });
+        QuizDataService.getQuiz(this.getQuizId())
+        .then(response => {
+            if(response.data == 0) {
+                this.setState({ accessible: false });
+            }
+            else {
+                this.setState({ accessible: true });
+            }
+        }).catch(e => {
+            console.log(e)
+        })
     }
 
     render() {
         return (
             <div>
-                <HeaderStudent></HeaderStudent>
-                <h1>Quiz {this.getQuizId()} Questions</h1>
-                {
-                    this.createQuestions()
+                {this.state.accessible ?
+                (
+                <div>
+                    <HeaderStudent></HeaderStudent>
+                    <h1>Quiz {this.getQuizId()} Questions</h1>
+                    {
+                        this.createQuestions()
+                    }
+                    <Button onClick={this.submitResponses.bind(this)}>Submit</Button>
+                </div>
+                )
+                :
+                <div><ErrorPage></ErrorPage></div>
                 }
-                <Button onClick={this.submitResponses.bind(this)}>Submit</Button>
             </div>
         );
     }
