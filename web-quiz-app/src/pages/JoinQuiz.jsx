@@ -12,8 +12,8 @@ function JoinQuiz() {
         if(nextPage) {
             window.location.href = '/quizAnswer/' + document.getElementById("quizID").value;
         }
-        else {
-            alert("This quiz doesn't exost, or is inaccessible")    
+        else if (!nextPage) {
+            alert("This quiz doesn't exist, or is inaccessible")    
         }
     }, [nextPage])
 
@@ -35,7 +35,7 @@ function JoinQuiz() {
                 setNextPage(true)
             }
             else {
-                alert("This quiz doesn't exost, or is inaccessible")
+                alert("This quiz doesn't exist, or is inaccessible")
             }
         }).catch(e => {
             console.log(e)
