@@ -38,7 +38,7 @@ function JoinQuiz() {
                 alert("This quiz doesn't exost, or is inaccessible")
             }
         }).catch(e => {
-    
+            console.log(e)
         })
     }
 }

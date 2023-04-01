@@ -41,13 +41,15 @@ function EditQuiz(){
     }, [userID])
 
     useEffect(() => {
-        QuizDataService.getQuiz(quizID)
-        .then(response => {
-            setActiveSwitch(response.data)
-        }).catch(e => {
-            console.log(e)
-        })
-        loadAllQuestions()
+        if(quizID) {
+            QuizDataService.getQuiz(quizID)
+            .then(response => {
+                setActiveSwitch(response.data)
+            }).catch(e => {
+                console.log(e)
+            })
+            loadAllQuestions()
+        }
     }, [quizID])
 
     const addQuestion = (question_type) => {
@@ -104,9 +106,7 @@ function EditQuiz(){
 
         if(quizID) {
             QuizDataService.changeQuizActivity(quizID)
-            .then(response => {
-
-            }).catch(e => {
+            .catch(e => {
                 console.log(e)
             })
         }
