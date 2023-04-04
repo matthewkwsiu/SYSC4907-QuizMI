@@ -66,12 +66,12 @@ class CreateUser extends React.Component {
             QuizDataService.createStudent(student)
                 .then(response => {
                     this.setState({ login: true }, () => {
-                        console.log("redirecting")
-                        window.location.href = '/quizControl';
+                        // console.log("redirecting")
+                        // window.location.href = '/quizControl';
                         console.log(this.state.login);
                     }); 
                     console.log("Created student" + student.student_name);
-                    QuizDataService.getStudentFromUsername(student.student_name)
+                    QuizDataService.getStudentFromUsername(student.student_username)
                         .then(response => {
                             console.log("Created student" + response.data.id);
                             localStorage.setItem("studentID", JSON.stringify(response.data.id))
@@ -94,7 +94,7 @@ class CreateUser extends React.Component {
     render() {
         return (
             <div>
-                <h1>Login</h1>
+                <h1>Create User</h1>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter Name" onChange={(e) => this.nameUpdate(e.target.value)}></input>

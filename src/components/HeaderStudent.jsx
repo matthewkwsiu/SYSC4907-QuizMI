@@ -1,13 +1,12 @@
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import { Outlet, Link } from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 function HeaderStudent() {
   return (
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      Navbar
-    </a>
+    <Navbar bg="light">
+    <a class="navbar-brand" href="#">QuizMI</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -41,7 +40,7 @@ function HeaderStudent() {
         <Dropdown.Item href="#/action-1" onClick={logoutUser}>Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  </nav>
+    </Navbar>
   );
 
   function logoutUser() {

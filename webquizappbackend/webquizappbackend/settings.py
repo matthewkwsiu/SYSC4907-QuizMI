@@ -16,6 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Note, the guide for setting up heroku suggests the following:
+# BASE_DIR = Path(__file__).resolve().root.root
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -24,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hajs+iqgx8$=e94jxh(+z6dki%vx!v8s*x2wn6i%5aa82co35o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -92,12 +94,20 @@ WSGI_APPLICATION = 'webquizappbackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'quizmidatabase', 
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1', 
+        'NAME': 'db7mpahtv0hj72', 
+        'USER': 'hnljlgywiqkpnp',
+        'PASSWORD': 'ad55b60baeadef65ffff6ec11754e670ec47495956fc8e9d8655ba2291f5974a',
+        'HOST': 'ec2-54-173-77-184.compute-1.amazonaws.com', 
         'PORT': '5432',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'quizmidatabase', 
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'password',
+    #     'HOST': '127.0.0.1', 
+    #     'PORT': '5432',
+    # }
 }
 
 
@@ -141,3 +151,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# backend/settings.py
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
+
+import django_heroku
+import dotenv
+import dj_database_url
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)

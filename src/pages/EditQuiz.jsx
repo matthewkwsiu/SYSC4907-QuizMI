@@ -17,6 +17,7 @@ function EditQuiz(){
     const [userID, setUserID] = useState();
     const [quizID, setQuizID] = useState();
     const [activeSwitch, setActiveSwitch] = useState();
+    const [responses, setResponses] = useState();
 
     useEffect(() => {
         QuizDataService.getInstructorID(JSON.parse(localStorage.getItem('user')))
@@ -52,9 +53,13 @@ function EditQuiz(){
         }
     }, [quizID])
 
+    useEffect(() => {
+        initializeResponses()
+    }, [quizID])
+
     const addQuestion = (question_type) => {
         var newQuestion;
-        if(question_type == 1){
+        if(question_type == 0){
             newQuestion = <TextQuestion insID={userID} qID={quizID} load={false}></TextQuestion>;
         }
         if(question_type == 2){
@@ -63,7 +68,7 @@ function EditQuiz(){
         if(question_type == 3){
             newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={false}></MultipleSelectQuestion>;
         }
-        if(question_type == 4){
+        if(question_type == 1){
             newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={false}></NumericalQuestion>;
         }
         setQuestions([...questions, newQuestion])
@@ -78,7 +83,7 @@ function EditQuiz(){
                     var newQuestion;
                     console.log(e.question_data)
                     switch(e.question_data) {
-                        case 1:
+                        case 0:
                             newQuestion = <TextQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></TextQuestion>;
                             break;
                         case 2:
@@ -87,7 +92,7 @@ function EditQuiz(){
                         case 3:
                             newQuestion = <MultipleSelectQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></MultipleSelectQuestion>;
                             break;
-                        case 4:
+                        case 1:
                             newQuestion = <NumericalQuestion insID={userID} qID={quizID} load={true} questionID={e.id} question={e.question_text} solution={e.question_solution} marks={e.question_total_marks}></NumericalQuestion>;
                             break;
                     }
@@ -118,6 +123,12 @@ function EditQuiz(){
         copyText.setSelectionRange(0, 99999);
         navigator.clipboard.writeText(copyText.value);
         alert("Copied the text: " + copyText.value);
+    }
+
+    function initializeResponses(){
+        if(quizID){
+            setResponses(<QuizResponses quiz_id={quizID}/>);
+        }
     }
 
     return(
@@ -157,16 +168,16 @@ function EditQuiz(){
                                     Add New Question
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu id="question_dropdown">
-                                    <Dropdown.Item onClick={e => {addQuestion(1);}}>Text</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => {addQuestion(0);}}>Text</Dropdown.Item>
                                     <Dropdown.Item onClick={e => {addQuestion(2);}}>Multiple Choice</Dropdown.Item>
                                     <Dropdown.Item onClick={e => {addQuestion(3);}}>Multiple Select</Dropdown.Item>
-                                    <Dropdown.Item onClick={e => {addQuestion(4);}}>Numerical</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => {addQuestion(1);}}>Numerical</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             </div>
                         </Tab>
                         <Tab eventKey="responses" title="Responses">
-                            <QuizResponses quiz_id={quizID}/>
+                            {responses}
                         </Tab>
                     </Tabs>
                 </div>
