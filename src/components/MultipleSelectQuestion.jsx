@@ -212,7 +212,7 @@ function MultipleSelectQuestion(props) {
             </form>
             <div class="submission">
                 <button type="submit" class="btn btn-primary" onClick={addFields}>
-                    Add More..
+                    Add More...
                 </button>
             </div>
             <div class="form-group row">
