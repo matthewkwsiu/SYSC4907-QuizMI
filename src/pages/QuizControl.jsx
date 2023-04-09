@@ -70,23 +70,33 @@ function QuizControl() {
         feedback_status: "no",
         instructor_id: userID
     }
-    QuizDataService.createQuiz(quiz)
-        .then(response => {
-            console.log("Created Quiz");
-        })
-        .catch(e => {
-            console.log(e);
-        });
-
-    var btn = document.createElement("button");
-    var t = document.createTextNode("Quiz: " + quiz.quiz_name + " Course: " + quiz.course_name);
-    btn.onclick = function () {
-		localStorage.setItem('lastSelectedQuiz', JSON.stringify(quiz.quiz_name));
-        window.location.href = '/editQuiz';
-    };
-    btn.appendChild(t);
-    document.getElementById('button-holder').appendChild(btn);
-}
+    if(!(coursename == '' || quizName == '')) {
+        QuizDataService.createQuiz(quiz)
+            .then(response => {
+                if(response.status == 201) {
+                    console.log("Created Quiz");
+                    var btn = document.createElement("button");
+                    var t = document.createTextNode("Quiz: " + quiz.quiz_name + " Course: " + quiz.course_name);
+                    btn.onclick = function () {
+                        localStorage.setItem('lastSelectedQuiz', JSON.stringify(quiz.quiz_name));
+                        window.location.href = '/editQuiz';
+                    };
+                    btn.appendChild(t);
+                    document.getElementById('button-holder').appendChild(btn);
+                }
+                else {
+                    alert("Problem creating quiz or the quiz exists already")
+                }
+            })
+            .catch(e => {
+                alert("Problem creating quiz or the quiz exists already")
+                console.log(e);
+            });
+        }
+        else {
+            alert("Quiz name or course name was left blank!")
+        }
+    }
 }
 
 export default QuizControl;

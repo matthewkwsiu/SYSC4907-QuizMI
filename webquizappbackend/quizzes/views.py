@@ -131,6 +131,11 @@ def quiz_list(request):
     
     elif request.method == 'POST':
         quiz_data = JSONParser().parse(request)
+        quiz_name_serialize = quiz_data['quiz_name']
+        instructor_id_serialize = quiz_data['instructor_id']
+        quizzes = Quiz.objects.all().filter(quiz_name=quiz_name_serialize, instructor_id=instructor_id_serialize)
+        if len(quizzes) > 0:
+            return JsonResponse(quiz_serializer.data, status=status.HTTP_400_BAD_REQUEST)
         quiz_serializer = QuizSerializer(data=quiz_data)
         if quiz_serializer.is_valid():
             quiz_serializer.save()
