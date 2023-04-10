@@ -210,6 +210,11 @@ function MultipleSelectQuestion(props) {
                     );
                 })}
             </form>
+            <div class="submission">
+                <button type="submit" class="btn btn-primary" onClick={addFields}>
+                    Add More...
+                </button>
+            </div>
             <div class="form-group row">
                 <div class="numberSlider">
                     {loadQuestion ?
@@ -218,13 +223,8 @@ function MultipleSelectQuestion(props) {
                     }
                 </div>
             </div>
-            <div class="submission">
-                <button type="submit" class="btn btn-primary" onClick={addFields}>
-                    Add More..
-                </button>
-                <div class="submissionButton">
-                    <button type="submit" class="btn btn-primary" onClick={submit}>Save</button>
-                </div>
+            <div class="submissionButton">
+                <button type="submit" class="btn btn-primary" onClick={submit}>Save</button>
             </div>
         </div>
     );

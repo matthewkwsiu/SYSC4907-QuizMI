@@ -12,9 +12,6 @@ function HeaderInstructor() {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <Link to="/" class="nav-link">Home</Link>
-                    </li>
                     <li class="nav-item">
                         <Link to="/quizControl" class="nav-link">Quiz Control</Link>
                     </li>
