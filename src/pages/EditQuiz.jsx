@@ -31,7 +31,7 @@ function EditQuiz(){
 
     useEffect(() => {
         if(userID) {
-            QuizDataService.crossCheckQuizID(JSON.parse(localStorage.getItem('lastSelectedQuiz')), userID)
+            QuizDataService.crossCheckQuizID(JSON.parse(localStorage.getItem('lastSelectedQuiz')), userID, JSON.parse(localStorage.getItem('lastSelectedQuizCourse')))
             .then(response => {
                 setQuizID(response.data)
             })
