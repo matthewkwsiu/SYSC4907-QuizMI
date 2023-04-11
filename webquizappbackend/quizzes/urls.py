@@ -9,7 +9,7 @@ urlpatterns = [
     path('students/username/<username>', views.username_getStudentFromUsername),
     path('quizzes', views.quiz_list), 
     path('quizzes/active/<int:pk>', views.quiz_active), 
-    path('quizzes/crossCheck/<quiz_name>/<username>', views.username_quizNameCrossCheck),
+    path('quizzes/crossCheck/<quiz_name>/<username>/<course_name>', views.username_quizNameCrossCheck),
     path('quizzes/instructor/<int:instructorId>', views.quiz_list_owned_by_instructor),
     path('questions', views.questions_list),
     path('questions/<int:questionId>', views.questions_detail),

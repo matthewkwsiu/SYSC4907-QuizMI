@@ -40,8 +40,8 @@ class QuizDataService {
     getInstructorID(instructor_username) {
         return http.get("/instructors/" + instructor_username);
     }
-    crossCheckQuizID(quiz_name, instructor_username) {
-        return http.get("/quizzes/crossCheck/" + quiz_name + "/" + instructor_username)
+    crossCheckQuizID(quiz_name, instructor_username, course_name) {
+        return http.get("/quizzes/crossCheck/" + quiz_name + "/" + instructor_username + "/" + course_name)
     }
     getResponsesFromStudentID(studentID) {
         return http.get("responses/student/" + studentID)

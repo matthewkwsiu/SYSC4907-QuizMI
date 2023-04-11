@@ -31,6 +31,7 @@ function QuizControl() {
                 var t = document.createTextNode("Quiz: " + e.quiz_name + " Course: " + e.course_name);
                 btn.onclick = function () {
                     localStorage.setItem('lastSelectedQuiz', JSON.stringify(e.quiz_name));
+                    localStorage.setItem('lastSelectedQuizCourse', JSON.stringify(e.course_name));
                     window.location.href = '/editQuiz'
                 };
                 btn.appendChild(t);
@@ -79,6 +80,7 @@ function QuizControl() {
                     var t = document.createTextNode("Quiz: " + quiz.quiz_name + " Course: " + quiz.course_name);
                     btn.onclick = function () {
                         localStorage.setItem('lastSelectedQuiz', JSON.stringify(quiz.quiz_name));
+                        localStorage.setItem('lastSelectedQuizCourse', JSON.stringify(quiz.course_name));
                         window.location.href = '/editQuiz';
                     };
                     btn.appendChild(t);
